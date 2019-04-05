@@ -1,7 +1,7 @@
 class Inventory:
     #dont have to do updating inventory
     def __init__(self, buns, wraps, patties, ingredients, sides, drinks):
-        #self._inventory = {}
+        self._inventory = inventory
         self.buns = buns
         self.wraps = wraps
         self.patties = patties
@@ -259,7 +259,7 @@ inventory.drinks.append(cola)
 inventory.drinks.append(fanta)
 inventory.drinks.append(sprite)
 
-# checking functions
+# checking functions and testing
 inventory.get_buns()
 print("")
 inventory.get_wraps()
