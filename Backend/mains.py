@@ -5,13 +5,14 @@ class ingredients:
     Creates an ingredient object, which specifies the quantity
     of lettuce,cheese, onions for a main
     """
+
     def __init__(self):
         self._lettuce = 0
         self._cheese = 0
         self._tomato = 0
         self._onions = 0
         self._pickles = 0
-        self._bacon - 0
+        self._bacon = 0
 
     #Setter functions
     def numLettuce(self,lettuce):
@@ -128,7 +129,7 @@ class Buns:
 
     def numPlainBuns(self,plain_bun):
         self._plain_bun = plain_bun
-        
+
 
 class Mains(ABC):
 
