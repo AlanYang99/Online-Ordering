@@ -21,15 +21,15 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
-class Bun:
+class Food:
     def __init__(self, name, price, amount):
         self.name = name
         self.price = price
         self.amount = amount
 
-brioche = Bun("Brioche Bun", 1, 100)
-sesame = Bun("Sesame Seed Bun", 1, 100)
-sourdough = Bun("Sourdough Bun", 1, 100)
+brioche = Food("Brioche Bun", 1, 100)
+sesame = Food("Sesame Seed Bun", 1, 100)
+sourdough = Food("Sourdough Bun", 1, 100)
 
 inventory = Inventory([], [], [], [], [], [])
 
