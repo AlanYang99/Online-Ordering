@@ -1,11 +1,11 @@
 class Inventory:
     #dont have to do updating inventory
-    def __init__(self, buns, wraps, patties, ingredient, sides, drinks):
+    def __init__(self, buns, wraps, patties, ingredients, sides, drinks):
         #self._inventory = {}
         self.buns = buns
         self.wraps = wraps
         self.patties = patties
-        self.ingredient = ingredient
+        self.ingredients = ingredients
         self.sides = sides
         self.drinks = drinks
 
@@ -106,6 +106,25 @@ beef = Food("Beef Patty", 1, 100)
 chicken = Food("Chicken Patty", 1, 100)
 lamb = Food("Lamb Patty", 1, 100)
 
+# creating a list of ingredients
+lettuce = Food("Lettuce", 1, 100)
+tomato = Food("Tomato", 1, 100)
+cheese = Food("Cheese", 1, 100)
+onion = Food("Onion", 1, 100)
+tomato_sauce = Food("Tomato Sauce", 1, 100)
+barbecue_sauce = Food("Barbecue Sauce", 1, 100)
+
+# creating a list of sides
+chips = Food("Chip", 1, 100)
+nuggets = Food("Nugget", 1, 100)
+apple_pie = Food("Apple pie", 1, 100)
+soft_serve = Food("Soft Serve", 1, 100)
+
+# creating a list of drinks
+cola = Food("Cola", 1, 100)
+fanta = Food("Fanta", 1, 100)
+sprite = Food("Sprite", 1, 100)
+
 # adding the buns to the inventory
 inventory.buns.append(brioche)
 inventory.buns.append(sesame)
@@ -119,6 +138,33 @@ inventory.patties.append(beef)
 inventory.patties.append(chicken)
 inventory.patties.append(lamb)
 
+# adding the ingredients to the inventory
+inventory.ingredients.append(lettuce)
+inventory.ingredients.append(tomato)
+inventory.ingredients.append(cheese)
+inventory.ingredients.append(onion)
+inventory.ingredients.append(tomato_sauce)
+inventory.ingredients.append(barbecue_sauce)
+
+# adding the sides to the inventory
+inventory.sides.append(chips)
+inventory.sides.append(nuggets)
+inventory.sides.append(apple_pie)
+inventory.sides.append(soft_serve)
+
+# adding the drinks to the inventory
+inventory.drinks.append(cola)
+inventory.drinks.append(fanta)
+inventory.drinks.append(sprite)
+
 inventory.get_buns()
+print("")
 inventory.get_warps()
+print("")
 inventory.get_patties()
+print("")
+inventory.get_ingredients()
+print("")
+inventory.get_sides()
+print("")
+inventory.get_drinks()
