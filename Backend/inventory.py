@@ -21,12 +21,36 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
-    def get_warps(self):
+    def get_buns_amount(self):
+        i = 1
+        while True:
+            try:
+                for bun in self.buns:
+                    print(str(i) + ".", bun.name, "has", str(bun.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_wraps(self):
         i = 1
         while True:
             try:
                 for wrap in self.wraps:
                     print(str(i) + ".", wrap.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_wraps_amount(self):
+        i = 1
+        while True:
+            try:
+                for wrap in self.wraps:
+                    print(str(i) + ".", wrap.name, "has", str(wrap.amount), "left")
                     i += 1
                 break
             except:
@@ -45,12 +69,36 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def get_patties_amount(self):
+        i = 1
+        while True:
+            try:
+                for patty in self.patties:
+                    print(str(i) + ".", patty.name, "has", str(patty.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
     def get_ingredients(self):
         i = 1
         while True:
             try:
                 for ingredient in self.ingredients:
                     print(str(i) + ".", ingredient.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_ingredients_amount(self):
+        i = 1
+        while True:
+            try:
+                for ingredient in self.ingredients:
+                    print(str(i) + ".", ingredient.name, "has", str(ingredient.amount), "left")
                     i += 1
                 break
             except:
@@ -69,12 +117,36 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def get_sides_amount(self):
+        i = 1
+        while True:
+            try:
+                for side in self.sides:
+                    print(str(i) + ".", side.name, "has", str(side.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
     def get_drinks(self):
         i = 1
         while True:
             try:
                 for drink in self.drinks:
                     print(str(i) + ".", drink.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_drinks_amount(self):
+        i = 1
+        while True:
+            try:
+                for drink in self.drinks:
+                    print(str(i) + ".", drink.name, "has", str(drink.amount), "left")
                     i += 1
                 break
             except:
@@ -157,9 +229,10 @@ inventory.drinks.append(cola)
 inventory.drinks.append(fanta)
 inventory.drinks.append(sprite)
 
+# checking functions
 inventory.get_buns()
 print("")
-inventory.get_warps()
+inventory.get_wraps()
 print("")
 inventory.get_patties()
 print("")
@@ -168,3 +241,16 @@ print("")
 inventory.get_sides()
 print("")
 inventory.get_drinks()
+print("")
+inventory.get_buns_amount()
+print("")
+inventory.get_wraps_amount()
+print("")
+inventory.get_patties_amount()
+print("")
+inventory.get_ingredients_amount()
+print("")
+inventory.get_sides_amount()
+print("")
+inventory.get_drinks_amount()
+print("")
