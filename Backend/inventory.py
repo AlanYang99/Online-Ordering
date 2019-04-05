@@ -33,6 +33,11 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def decrease_bun(self, name):
+        for bun in self.buns:
+            if bun.name == name:
+                bun.amount -= 1
+
     def get_wraps(self):
         i = 1
         while True:
@@ -56,6 +61,11 @@ class Inventory:
             except:
                 print("Invalid input, please try again")
             i = 1
+
+    def decrease_wrap(self, name):
+        for wrap in self.wraps:
+            if wrap.name == name:
+                wrap.amount -= 1
 
     def get_patties(self):
         i = 1
@@ -81,6 +91,11 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def decrease_patty(self, name):
+        for patty in self.patties:
+            if patty.name == name:
+                patty.amount -= 1
+
     def get_ingredients(self):
         i = 1
         while True:
@@ -104,6 +119,11 @@ class Inventory:
             except:
                 print("Invalid input, please try again")
             i = 1
+
+    def decrease_ingredient(self, name):
+        for ingredient in self.ingredients:
+            if ingredient.name == name:
+                ingredient.amount -= 1
     
     def get_sides(self):
         i = 1
@@ -129,6 +149,11 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def decrease_side(self, name):
+        for side in self.sides:
+            if side.name == name:
+                side.amount -= 1
+
     def get_drinks(self):
         i = 1
         while True:
@@ -152,6 +177,11 @@ class Inventory:
             except:
                 print("Invalid input, please try again")
             i = 1
+    
+    def decrease_drink(self, name):
+        for drink in self.drinks:
+            if drink.name == name:
+                drink.amount -= 1
 
 class Food:
     def __init__(self, name, price, amount):
@@ -254,3 +284,30 @@ inventory.get_sides_amount()
 print("")
 inventory.get_drinks_amount()
 print("")
+inventory.decrease_bun("Brioche Bun")
+print("")
+inventory.get_buns_amount()
+print("")
+inventory.decrease_bun("Sesame Seed Bun")
+print("")
+inventory.get_buns_amount()
+print("")
+inventory.decrease_wrap("Flatbread")
+print("")
+inventory.get_wraps_amount()
+print("")
+inventory.decrease_patty("Beef Patty")
+print("")
+inventory.get_patties_amount()
+print("")
+inventory.decrease_ingredient("Cheese")
+print("")
+inventory.get_ingredients_amount()
+print("")
+inventory.decrease_side("Nugget")
+print("")
+inventory.get_sides_amount()
+print("")
+inventory.decrease_drink("Cola")
+print("")
+inventory.get_drinks_amount()
