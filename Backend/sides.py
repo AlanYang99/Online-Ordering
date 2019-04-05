@@ -20,3 +20,24 @@ class sides:
 
     def printSides(self):
         return f'small_fries {self.small_fries.amount}'
+
+
+class item:
+
+    def __init__(price,amount): #not sure if we need name
+        self.price = price
+        self.amount = amount
+
+class big:
+
+    def __init__(self):
+        self.fries = [small_fries == item(0.5,1),medium_fries == item(1,1),large_fries == item(2,1)]
+
+    def printprice(self):
+        price = 0
+        for i in self.fries:
+            price += i.price
+        return fries
+
+    def setFries(self,size):
+        if(size ==  0):

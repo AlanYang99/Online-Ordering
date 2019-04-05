@@ -12,9 +12,8 @@ class drinks:
         self.fanta = fanta
         self.solo = solo
 
-
     def drinkprices(self):
         return self.coke.price * self.coke.amount #gonna finalise this later
 
-    def printSides(self):
+    def printDrinks(self):
         return f'coke: {self.coke.amount}'
