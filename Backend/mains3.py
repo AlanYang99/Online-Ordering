@@ -131,10 +131,35 @@ class Wraps(mains):
         #output += self._wraps.getIngredients()
         return output
 
+class meals:
 
+    def __init__(self):
+        self._burgers = []
+        self._wraps = []
 
+    def addBurger(self,burger):
+        self._burgers.append(burger)
 
+    def addWrap(self,wrap):
+        self._wraps.append(wrap)
 
+    def displayMains(self):
+        output = ''
+        for i in self._burgers:
+            output+= 'Plain burger:\n'
+            output+= f' {i.getIngredients()}'
+        for i in self._wraps:
+            output+= 'Plain wrap:\n'
+            output+= f' {i.getIngredients()}'
+        return output
+
+    def price(self):
+        price = 0
+        for i in self._burgers:
+            price += i.getPrice()
+        for i in self._wraps:
+            price += i.getPrice()
+        return price
 
 Veg1 = Vegetables(1,2)
 Cheese1 = Cheese(1,2)
@@ -157,3 +182,9 @@ print(Burger1.getPrice())
 print(Wrap1.getIngredients())
 print('Price = ')
 print(Wrap1.getPrice())
+
+meal1 = meals()
+meal1.addBurger(Burger1)
+meal1.addWrap(Wrap1)
+print(meal1.displayMains())
+print(meal1.price())
