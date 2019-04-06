@@ -22,28 +22,55 @@ class sides:
         return f'small_fries {self.small_fries.amount}'
 
 
-class item:
-
-    def __init__(price,amount): #not sure if we need name
-        self.price = price
-        self.amount = amount
-
 class big:
 
     def __init__(self):
-        self.fries = [small_fries == item(0.5,1),medium_fries == item(1,1),large_fries == item(2,1)]
-        self.nuggets =
+        self.fries = [Food('smallfries',2,0),Food('mediumfries',3,0),Food('largefries',4,0)]
+        self.nuggets =[Food('sixnuggets',6,0),Food('tennuggets',10,0)]
+        self.others = [Food('sundae',2,0)]
+
+    def set_small_Fries(self,amount):
+        self.fries[0].amount = amount
+
+    def set_medium_fries(self,amount):
+        self.fries[1].amount = amount
+
+    def set_large_fries(self,amount):
+        self.fries[2].amount = amount
+
+    def set_six_nuggets(self,amount):
+        self.nuggets[0].amount = amount
+
+    def set_ten_nuggets(self,amount):
+        self.nuggets[1].amount = amount
+
+    def set_other_sides(self,side,amount):
+        found = 0
+        for i in self.others:
+            if(i.name is side):
+                found = 1
+                i.amount = amount
+        if(found is 0)
+            print("Side not found")
 
     def printprice(self):
         price = 0
         for i in self.fries:
             price += i.price
-        return fries
+        for i in self.nuggets
+            price+=i.price
+        for i in self.others
+            price += i.price
+        return price
 
-    def setFries(self,amount,size):
+    def getSides(self):
+        sides = ''
         for i in self.fries:
-            i.amount = amount
-        #OR
+            sides += f'{i.name} : {i.amount}'
+        for i in self.nuggets:
+            sides += f'{i.name} : {i.amount}'
+        for i in self.others:
+            sides += f'{i.name} : {i.amount}'
+        return sides
 
-    def setsmallFriest(self,amount):
-        self.fries[0].amount = amount
+        

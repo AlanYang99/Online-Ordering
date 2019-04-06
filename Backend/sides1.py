@@ -61,5 +61,7 @@ side1.set_small_Fries(3)
 side1.set_medium_fries(1)
 side1.set_six_nuggets(4)
 side1.set_other_sides('sundae',4)
+"""
 print(side1.getSides())
 print(side1.printprice())
+"""

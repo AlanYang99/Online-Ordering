@@ -48,5 +48,7 @@ class drinks:
 drink1 = drinks()
 drink1.set_cans('coke',2)
 drink1.set_bottles('fanta',3)
+"""
 print(drink1.printDrinks())
 print(drink1.price())
+"""

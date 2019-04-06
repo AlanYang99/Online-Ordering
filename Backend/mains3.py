@@ -51,8 +51,14 @@ class Cheese(Ingredients):
 
 class Sauce(Ingredients):
 
+    ingredient = []
     def __init__(self,tomato = 0,bbq = 0):
         self._ingredients = [Food('tomatosauce',tomato,0.5),Food('bbqsauce',bbq,0.3)]
+
+    @classmethod
+    def printSauce(cls):
+        print(cls.ingredient[0])
+        print(cls.ingredient[1])
 
 class Patties(Ingredients):
 
@@ -175,6 +181,7 @@ Veg1.setIngredients('Pumpkin',3)
 
 Burger1 = Burgers(Veg1,Cheese1,Sauce1,Patties1,Buns1)
 Wrap1 = Wraps(Veg1,Cheese1,Sauce1,tender1,wraps1)
+"""
 print(Burger1.getIngredients())
 print('Price = ')
 print(Burger1.getPrice())
@@ -188,3 +195,4 @@ meal1.addBurger(Burger1)
 meal1.addWrap(Wrap1)
 print(meal1.displayMains())
 print(meal1.price())
+"""
