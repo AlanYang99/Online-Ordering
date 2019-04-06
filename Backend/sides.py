@@ -32,6 +32,7 @@ class big:
 
     def __init__(self):
         self.fries = [small_fries == item(0.5,1),medium_fries == item(1,1),large_fries == item(2,1)]
+        self.nuggets =
 
     def printprice(self):
         price = 0
@@ -39,5 +40,10 @@ class big:
             price += i.price
         return fries
 
-    def setFries(self,size):
-        if(size ==  0):
+    def setFries(self,amount,size):
+        for i in self.fries:
+            i.amount = amount
+        #OR
+
+    def setsmallFriest(self,amount):
+        self.fries[0].amount = amount
