@@ -35,10 +35,10 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
-    def decrease_bun(self, name):
+    def decrease_bun(self, name, amount):
         for bun in self.buns:
             if bun.name == name:
-                bun.amount -= 1
+                bun.amount -= amount
 
     def add_wrap(self, wrap):
         self.wraps.append(wrap)
@@ -67,10 +67,10 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
-    def decrease_wrap(self, name):
+    def decrease_wrap(self, name, amount):
         for wrap in self.wraps:
             if wrap.name == name:
-                wrap.amount -= 1
+                wrap.amount -= amount
 
     def add_patty(self, patty):
         self.patties.append(patty)
@@ -99,10 +99,10 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
-    def decrease_patty(self, name):
+    def decrease_patty(self, name, amount):
         for patty in self.patties:
             if patty.name == name:
-                patty.amount -= 1
+                patty.amount -= amount
 
     def add_ingredient(self, ingredient):
         self.ingredients.append(ingredient)
@@ -131,10 +131,10 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
-    def decrease_ingredient(self, name):
+    def decrease_ingredient(self, name, amount):
         for ingredient in self.ingredients:
             if ingredient.name == name:
-                ingredient.amount -= 1
+                ingredient.amount -= amount
 
     def add_side(self, side):
         self.sides.append(side)
@@ -163,10 +163,10 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
-    def decrease_side(self, name):
+    def decrease_side(self, name, amount):
         for side in self.sides:
             if side.name == name:
-                side.amount -= 1
+                side.amount -= amount
     
     def add_drink(self, drink):
         self.drinks.append(drink)
@@ -195,10 +195,10 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
     
-    def decrease_drink(self, name):
+    def decrease_drink(self, name, amount):
         for drink in self.drinks:
             if drink.name == name:
-                drink.amount -= 1
+                drink.amount -= amount
 
 class Food:
     def __init__(self, name, price, amount):
@@ -303,30 +303,30 @@ inventory.get_sides_amount()
 print("")
 inventory.get_drinks_amount()
 print("")
-inventory.decrease_bun("Brioche Bun")
+inventory.decrease_bun("Brioche Bun", 1)
 print("")
 inventory.get_buns_amount()
 print("")
-inventory.decrease_bun("Sesame Seed Bun")
+inventory.decrease_bun("Sesame Seed Bun", 2)
 print("")
 inventory.get_buns_amount()
 print("")
-inventory.decrease_wrap("Flatbread")
+inventory.decrease_wrap("Flatbread", 3)
 print("")
 inventory.get_wraps_amount()
 print("")
-inventory.decrease_patty("Beef Patty")
+inventory.decrease_patty("Beef Patty", 4)
 print("")
 inventory.get_patties_amount()
 print("")
-inventory.decrease_ingredient("Cheese")
+inventory.decrease_ingredient("Cheese", 5)
 print("")
 inventory.get_ingredients_amount()
 print("")
-inventory.decrease_side("Nugget")
+inventory.decrease_side("Nugget", 6)
 print("")
 inventory.get_sides_amount()
 print("")
-inventory.decrease_drink("Cola")
+inventory.decrease_drink("Cola", 7)
 print("")
 inventory.get_drinks_amount()
