@@ -8,6 +8,9 @@ class Inventory:
         self.sides = sides
         self.drinks = drinks
 
+    def add_bun(self, bun):
+        self.buns.append(bun)
+
     def get_buns(self):
         i = 1
         while True:
@@ -36,6 +39,9 @@ class Inventory:
         for bun in self.buns:
             if bun.name == name:
                 bun.amount -= 1
+
+    def add_wrap(self, wrap):
+        self.wraps.append(wrap)
 
     def get_wraps(self):
         i = 1
@@ -66,6 +72,9 @@ class Inventory:
             if wrap.name == name:
                 wrap.amount -= 1
 
+    def add_patty(self, patty):
+        self.patties.append(patty)
+
     def get_patties(self):
         i = 1
         while True:
@@ -95,6 +104,9 @@ class Inventory:
             if patty.name == name:
                 patty.amount -= 1
 
+    def add_ingredient(self, ingredient):
+        self.ingredients.append(ingredient)
+
     def get_ingredients(self):
         i = 1
         while True:
@@ -123,6 +135,9 @@ class Inventory:
         for ingredient in self.ingredients:
             if ingredient.name == name:
                 ingredient.amount -= 1
+
+    def add_side(self, side):
+        self.sides.append(side)
     
     def get_sides(self):
         i = 1
@@ -152,6 +167,9 @@ class Inventory:
         for side in self.sides:
             if side.name == name:
                 side.amount -= 1
+    
+    def add_drink(self, drink):
+        self.drinks.append(drink)
 
     def get_drinks(self):
         i = 1
@@ -227,36 +245,38 @@ fanta = Food("Fanta", 1, 100)
 sprite = Food("Sprite", 1, 100)
 
 # adding the buns to the inventory
-inventory.buns.append(brioche)
-inventory.buns.append(sesame)
-inventory.buns.append(sourdough)
-
+# inventory.buns.append(brioche)
+# inventory.buns.append(sesame)
+# inventory.buns.append(sourdough)
+inventory.add_bun(brioche)
+inventory.add_bun(sesame)
+inventory.add_bun(sourdough)
 # adding the wraps to the inventory
-inventory.wraps.append(flatbread)
+inventory.add_wrap(flatbread)
 
 # adding the patties to the inventory
-inventory.patties.append(beef)
-inventory.patties.append(chicken)
-inventory.patties.append(lamb)
+inventory.add_patty(beef)
+inventory.add_patty(chicken)
+inventory.add_patty(lamb)
 
 # adding the ingredients to the inventory
-inventory.ingredients.append(lettuce)
-inventory.ingredients.append(tomato)
-inventory.ingredients.append(cheese)
-inventory.ingredients.append(onion)
-inventory.ingredients.append(tomato_sauce)
-inventory.ingredients.append(barbecue_sauce)
+inventory.add_ingredient(lettuce)
+inventory.add_ingredient(tomato)
+inventory.add_ingredient(cheese)
+inventory.add_ingredient(onion)
+inventory.add_ingredient(tomato_sauce)
+inventory.add_ingredient(barbecue_sauce)
 
 # adding the sides to the inventory
-inventory.sides.append(chips)
-inventory.sides.append(nuggets)
-inventory.sides.append(apple_pie)
-inventory.sides.append(soft_serve)
+inventory.add_side(chips)
+inventory.add_side(nuggets)
+inventory.add_side(apple_pie)
+inventory.add_side(soft_serve)
 
 # adding the drinks to the inventory
-inventory.drinks.append(cola)
-inventory.drinks.append(fanta)
-inventory.drinks.append(sprite)
+inventory.add_drink(cola)
+inventory.add_drink(fanta)
+inventory.add_drink(sprite)
 
 # checking functions and testing
 inventory.get_buns()
