@@ -1,58 +1,186 @@
 class Inventory:
     #dont have to do updating inventory
-    def __init__(self):
-        self.inventory = []
-        self.buns = []
-        self.wraps = []
-        self.patties = []
-        self.ingredients = []
-        self.sides = []
-        self.drinks = []
-
-    def add_bun(self, name, price, amount):
-        self.buns.append((name, price, amount))
+    def __init__(self, buns, wraps, patties, ingredients, sides, drinks):
+        self.buns = buns
+        self.wraps = wraps
+        self.patties = patties
+        self.ingredients = ingredients
+        self.sides = sides
+        self.drinks = drinks
 
     def get_buns(self):
         i = 1
-        for bun in self.buns:
-            print(str(i) + ".", bun)
-            i += 1
+        while True:
+            try:
+                for bun in self.buns:
+                    print(str(i) + ".", bun.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_buns_amount(self):
         i = 1
+        while True:
+            try:
+                for bun in self.buns:
+                    print(str(i) + ".", bun.name, "has", str(bun.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
 
     def decrease_bun(self, name):
         for bun in self.buns:
             if bun.name == name:
                 bun.amount -= 1
 
-    def add_wrap(self, name, price, amount):
-        self.wraps.append((name, price, amount))
-
     def get_wraps(self):
         i = 1
-        for wrap in self.wraps:
-            print(str(i) + ".", wrap)
-            i += 1
+        while True:
+            try:
+                for wrap in self.wraps:
+                    print(str(i) + ".", wrap.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_wraps_amount(self):
         i = 1
+        while True:
+            try:
+                for wrap in self.wraps:
+                    print(str(i) + ".", wrap.name, "has", str(wrap.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
 
     def decrease_wrap(self, name):
         for wrap in self.wraps:
             if wrap.name == name:
                 wrap.amount -= 1
 
-    def add_patty(self, name, price, amount):
-        self.patties.append((name, price, amount))
+    def get_patties(self):
+        i = 1
+        while True:
+            try:
+                for patty in self.patties:
+                    print(str(i) + ".", patty.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
 
-    def get_patty(self):
+    def get_patties_amount(self):
         i = 1
-        for patty in self.patties:
-            print(str(i) + ".", patty)
-            i += 1
-        i = 1
+        while True:
+            try:
+                for patty in self.patties:
+                    print(str(i) + ".", patty.name, "has", str(patty.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
 
     def decrease_patty(self, name):
         for patty in self.patties:
             if patty.name == name:
                 patty.amount -= 1
+
+    def get_ingredients(self):
+        i = 1
+        while True:
+            try:
+                for ingredient in self.ingredients:
+                    print(str(i) + ".", ingredient.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_ingredients_amount(self):
+        i = 1
+        while True:
+            try:
+                for ingredient in self.ingredients:
+                    print(str(i) + ".", ingredient.name, "has", str(ingredient.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def decrease_ingredient(self, name):
+        for ingredient in self.ingredients:
+            if ingredient.name == name:
+                ingredient.amount -= 1
+    
+    def get_sides(self):
+        i = 1
+        while True:
+            try:
+                for side in self.sides:
+                    print(str(i) + ".", side.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_sides_amount(self):
+        i = 1
+        while True:
+            try:
+                for side in self.sides:
+                    print(str(i) + ".", side.name, "has", str(side.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def decrease_side(self, name):
+        for side in self.sides:
+            if side.name == name:
+                side.amount -= 1
+
+    def get_drinks(self):
+        i = 1
+        while True:
+            try:
+                for drink in self.drinks:
+                    print(str(i) + ".", drink.name)
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+
+    def get_drinks_amount(self):
+        i = 1
+        while True:
+            try:
+                for drink in self.drinks:
+                    print(str(i) + ".", drink.name, "has", str(drink.amount), "left")
+                    i += 1
+                break
+            except:
+                print("Invalid input, please try again")
+            i = 1
+    
+    def decrease_drink(self, name):
+        for drink in self.drinks:
+            if drink.name == name:
+                drink.amount -= 1
 
 class Food:
     def __init__(self, name, price, amount):
@@ -61,7 +189,7 @@ class Food:
         self.amount = amount
 
 # turning inventory into an object
-#inventory = Inventory([], [], [], [], [], [])
+inventory = Inventory([], [], [], [], [], [])
 
 # how adding the food works
 # <generic name for the item> = Food(<"name">, <price>, <amount>)
@@ -99,90 +227,86 @@ fanta = Food("Fanta", 1, 100)
 sprite = Food("Sprite", 1, 100)
 
 # adding the buns to the inventory
-inventory = Inventory()
+inventory.buns.append(brioche)
+inventory.buns.append(sesame)
+inventory.buns.append(sourdough)
 
-inventory.add_bun("Brioche Bun", 1, 100)
-# Inventory.buns.append(brioche)
-# Inventory.buns.append(sesame)
-# Inventory.buns.append(sourdough)
+# adding the wraps to the inventory
+inventory.wraps.append(flatbread)
 
-# # adding the wraps to the inventory
-# inventory.wraps.append(flatbread)
+# adding the patties to the inventory
+inventory.patties.append(beef)
+inventory.patties.append(chicken)
+inventory.patties.append(lamb)
 
-# # adding the patties to the inventory
-# inventory.patties.append(beef)
-# inventory.patties.append(chicken)
-# inventory.patties.append(lamb)
+# adding the ingredients to the inventory
+inventory.ingredients.append(lettuce)
+inventory.ingredients.append(tomato)
+inventory.ingredients.append(cheese)
+inventory.ingredients.append(onion)
+inventory.ingredients.append(tomato_sauce)
+inventory.ingredients.append(barbecue_sauce)
 
-# # adding the ingredients to the inventory
-# inventory.ingredients.append(lettuce)
-# inventory.ingredients.append(tomato)
-# inventory.ingredients.append(cheese)
-# inventory.ingredients.append(onion)
-# inventory.ingredients.append(tomato_sauce)
-# inventory.ingredients.append(barbecue_sauce)
+# adding the sides to the inventory
+inventory.sides.append(chips)
+inventory.sides.append(nuggets)
+inventory.sides.append(apple_pie)
+inventory.sides.append(soft_serve)
 
-# # adding the sides to the inventory
-# inventory.sides.append(chips)
-# inventory.sides.append(nuggets)
-# inventory.sides.append(apple_pie)
-# inventory.sides.append(soft_serve)
-
-# # adding the drinks to the inventory
-# inventory.drinks.append(cola)
-# inventory.drinks.append(fanta)
-# inventory.drinks.append(sprite)
+# adding the drinks to the inventory
+inventory.drinks.append(cola)
+inventory.drinks.append(fanta)
+inventory.drinks.append(sprite)
 
 # checking functions and testing
-
 inventory.get_buns()
 print("")
-# inventory.get_wraps()
-# print("")
-# inventory.get_patties()
-# print("")
-# inventory.get_ingredients()
-# print("")
-# inventory.get_sides()
-# print("")
-# inventory.get_drinks()
-# print("")
-# inventory.get_buns_amount()
-# print("")
-# inventory.get_wraps_amount()
-# print("")
-# inventory.get_patties_amount()
-# print("")
-# inventory.get_ingredients_amount()
-# print("")
-# inventory.get_sides_amount()
-# print("")
-# inventory.get_drinks_amount()
-# print("")
+inventory.get_wraps()
+print("")
+inventory.get_patties()
+print("")
+inventory.get_ingredients()
+print("")
+inventory.get_sides()
+print("")
+inventory.get_drinks()
+print("")
+inventory.get_buns_amount()
+print("")
+inventory.get_wraps_amount()
+print("")
+inventory.get_patties_amount()
+print("")
+inventory.get_ingredients_amount()
+print("")
+inventory.get_sides_amount()
+print("")
+inventory.get_drinks_amount()
+print("")
 inventory.decrease_bun("Brioche Bun")
 print("")
 inventory.get_buns_amount()
 print("")
-# inventory.decrease_bun("Sesame Seed Bun")
-# print("")
-# inventory.get_buns_amount()
-# print("")
-# inventory.decrease_wrap("Flatbread")
-# print("")
-# inventory.get_wraps_amount()
-# print("")
-# inventory.decrease_patty("Beef Patty")
-# print("")
-# inventory.get_patties_amount()
-# print("")
-# inventory.decrease_ingredient("Cheese")
-# print("")
-# inventory.get_ingredients_amount()
-# print("")
-# inventory.decrease_side("Nugget")
-# print("")
-# inventory.get_sides_amount()
-# print("")
-# inventory.decrease_drink("Cola")
-# print("")
-# inventory.get_drinks_amount()
+inventory.decrease_bun("Sesame Seed Bun")
+print("")
+inventory.get_buns_amount()
+print("")
+inventory.decrease_wrap("Flatbread")
+print("")
+inventory.get_wraps_amount()
+print("")
+inventory.decrease_patty("Beef Patty")
+print("")
+inventory.get_patties_amount()
+print("")
+inventory.decrease_ingredient("Cheese")
+print("")
+inventory.get_ingredients_amount()
+print("")
+inventory.decrease_side("Nugget")
+print("")
+inventory.get_sides_amount()
+print("")
+inventory.decrease_drink("Cola")
+print("")
+inventory.get_drinks_amount()
