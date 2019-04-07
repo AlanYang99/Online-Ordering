@@ -35,6 +35,11 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def increase_bun(self, name, amount):
+        for bun in self.buns:
+            if bun.name == name:
+                bun.amount += amount
+
     def decrease_bun(self, name, amount):
         for bun in self.buns:
             if bun.name == name:
@@ -66,6 +71,11 @@ class Inventory:
             except:
                 print("Invalid input, please try again")
             i = 1
+
+    def increase_wrap(self, name, amount):
+        for wrap in self.wraps:
+            if wrap.name == name:
+                wrap.amount += amount
 
     def decrease_wrap(self, name, amount):
         for wrap in self.wraps:
@@ -99,6 +109,11 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def increase_patty(self, name, amount):
+        for patty in self.patties:
+            if patty.name == name:
+                patty.amount += amount
+
     def decrease_patty(self, name, amount):
         for patty in self.patties:
             if patty.name == name:
@@ -130,6 +145,11 @@ class Inventory:
             except:
                 print("Invalid input, please try again")
             i = 1
+
+    def increase_ingredient(self, name, amount):
+        for ingredient in self.ingredients:
+            if ingredient.name == name:
+                ingredient.amount += amount
 
     def decrease_ingredient(self, name, amount):
         for ingredient in self.ingredients:
@@ -163,6 +183,11 @@ class Inventory:
                 print("Invalid input, please try again")
             i = 1
 
+    def increase_side(self, name, amount):
+        for side in self.sides:
+            if side.name == name:
+                side.amount += amount
+
     def decrease_side(self, name, amount):
         for side in self.sides:
             if side.name == name:
@@ -194,7 +219,12 @@ class Inventory:
             except:
                 print("Invalid input, please try again")
             i = 1
-    
+
+    def increase_drink(self, name, amount):
+        for drink in self.drinks:
+            if drink.name == name:
+                drink.amount += amount
+
     def decrease_drink(self, name, amount):
         for drink in self.drinks:
             if drink.name == name:
