@@ -1,154 +1,134 @@
 from abc import ABC
 
-class ingredients:
-    """
-    Creates an ingredient object, which specifies the quantity
-    of lettuce,cheese, onions for a main
-    """
+class item:
+    '''
+    Utility class for ingredients or food in general, which has the
+    attributes: name, price, amount
+    '''
+    def __init__(self,name,price,amount,type):
+        self._name = name
+        self._price = price
+        self._amount = amount
+        self._type = type
+
+    #Changes the str function
+    def __str__(self):
+        if(self._amount is not 0):
+            return f'{self._amount} x {self._name} : {self._price * self._amount}'
+
+class Ingredients():
+    '''
+    Ingredients class which contains an attribute which is a list of
+    items
+    '''
+    #Inventory should retrive from the actual inventory class
+    #to see avaiable items
 
     def __init__(self):
-        self._lettuce = 0
-        self._cheese = 0
-        self._tomato = 0
-        self._onions = 0
-        self._pickles = 0
-        self._bacon = 0
+        self._ingredients = []
 
-    #Setter functions
-    def numLettuce(self,lettuce):
-        self._lettuce = lettuce
+    '''
+    Passes in a string (ingredient name), and checks if that
+    ingredient exist in the system, if it does allows customer
+    to choose the amount they want to order
+    '''
+    def set_ingredients(self,ingredient,amount):
+        found = 0
+        infile = open("ingredients", "rb")
+        ingredients = pickle.load(infile)
+        infile.close()
+        for i in ingredients:
+            if(i.name is ingredient):
+                self._ingredients.append(Food(i._name, i._price, i._amount))
+                found = 1
+        if(found is 0):
+            print("Ingredient is not found")
 
-    def numCheese(self, cheese):
-        self._cheese = cheese
-
-    def numTomatoes(self,tomato):
-        self._tomato = tomato
-
-    def numOnions(self,onion):
-        self._onions = onions
-
-    def numPickles(self,pickles):
-        self._pickles = pickles
-
-    def numBacon(self, bacon):
-        self._bacon - bacon
-
-    #Getter functions
     @property
     def getIngredients(self):
-        output = ''
-        if(self._lettuce != 0):
-            output += f'    Lettuce : {self._lettuce}\n'
-        if(self._cheese != 0):
-            output += f'    Cheese : {self._cheese}\n'
-        if(self._tomato != 0):
-            output += f'    Tomato : {self._tomato}\n'
-        if(self._bacon != 0):
-            output += f'    Bacon : {self._bacon}\n'
-        if(self._onions != 0):
-            output += f'    Onions : {self._onions}\n'
-        if(self._pickles != 0):
-            output += f'    Pickles : {self._pickles}\n'
-        return output
+        ingredient_list = ' '
+        for ingredient in self._ingredients:
+            ingredient_list += "   " + str(ingredient)
+        return ingredient_list
 
     @property
-    def getPrice(self):
-        return 0 #Think of price later
+    def price(self):
+        cost = 0
+        for ingredient in self._ingredients:
+            cost += (ingredient._amount * ingredient._price)
+        return cost
 
+#Could just name wrapIngredients and burgeringredients as ingredients and just
+#inherit from Ingredients
+class wrapIngredients:
 
-class Sauce:
+    Inventory = []
 
-    """
-    Creates a sauce object, which specifies which sauce
-    the customer wants in their main
-    """
     def __init__(self):
-        self._tomatoSauce = 0
-        self._BBqSauce = 0
-        self._mayo = 0
-        self._chilli_sauce = 0
+        self._wrapIngredients = []
 
-    def numTomatoSauce(self,tomato_sauce):
-        self._tomato_sauce = tomato_sauce
-
-    def numBbqSauce(self, bbq_sauce):
-        self._bbq_sauce = bbq_sauce
-
-    def numMayo(self,mayo):
-        self._mayo = mayo
-
-    def numChilliSauce(self,chilli_sauce):
-        self._chilli_sauce = chilli_sauce
+    def set_wrapIngredients(self,wrapIngredient,amount):
+        found = 0
+        infile = open("wrapIngredients", "rb")
+        wrapIngredients = pickle.load(infile)
+        infile.close()
+        for i in wrapIngredients:
+            if(i._name is wrapIngredient):
+                self._wrapIngredients.append(Food(i._name, i._price, i._amount))
+                found = 1
+        if(found is 0):
+            print("Ingredient is not found")
 
     @property
-    def getSauce(self):
-        output = f'Sauce:'
-        if(self._tomato_sauce is not 0):
-            output+= f' Tomato Sauce'
-        if(self._BBqSauce is not 0):
-            output+= f' BBq Sauce'
-        if(self._mayo is not 0):
-            output+= f' Mayo Sauce'
-        if(self._chilli_sauce is not 0):
-            output+= f' Chilli Sauce'
-        return output
+    def get_wrapIngredients(self):
+        wrap_ingredient_list = ' '
+        for ingredient in self._wrapIngredients:
+            wrap_ingredient_list += "   " + str(ingredient)
+        return wrap_ingredient_list
 
+    @property
+    def price(self):
+        cost = 0
+        for ingredient in self._wrapIngredients:
+            cost += (ingredient._amount * ingredient._price)
+        return cost
 
-class meat:
-    def __init__(self):
-        self._beef_patty = 0
-        self._chick_fillet = 0
-        self._crispy_chick = 0
-        self._chick_tender = 0
+class burgerIngredients:
 
-    def numBeefPatty(self,beef_patty):
-        self._beef_patty = beef_patty
-
-    def numChickFillet(self, chick_fillet):
-        self._chick_fillet = chick_fillet
-
-    def numCrispyChick(self,crispy_chicken):
-        self._crispy_chick = crispy_chicken
-
-    def numOnions(self,_chick_tender):
-        self._chick_tender = chick_tender
-
-
-class Buns:
+    Inventory = []
 
     def __init__(self):
-        self._sesame_buns = 0
-        self._muffin_buns = 0
-        self._plain_bun = 0
+        self._burgerIngredients = []
 
-    def numSesameBuns(self,sesame_bun):
-        self._sesame_buns = sesame_bun
+    def set_burgerIngredients(self,burgerIngredient,amount):
+        found = 0
+        infile = open("burgerIngredients", "rb")
+        burgerIngredients = pickle.load(infile)
+        infile.close
+        for i in burgerIngredients:
+            if(i._name is burgerIngredient):
+                self._burgerIngredients.append(Food(i._name, i._price, i._amount))
+                found = 1
+        if(found is 0):
+            print("Ingredient is not found")
 
-    def numMuffinBuns(self,muffin_bun):
-        self._muffin_buns = muffin_bun
+    @property
+    def get_burgerIngredients(self):
+        burger_ingredient_list = ' '
+        for ingredient in self._burgerIngredients:
+            burger_ingredient_list += "   " + str(ingredient)
+        return burger_ingredient_list
 
-    def numPlainBuns(self,plain_bun):
-        self._plain_bun = plain_bun
+    @property
+    def price(self):
+        cost = 0
+        for ingredient in self._burgerIngredients:
+            cost += (ingredient._amount * ingredient._price)
+        return cost
 
+class mains(ABC):
 
-class Mains(ABC):
-
-    def __init__(self,ingredients,sauce,meat):
+    def __init__(self,ingredient):
         self._ingredients = ingredient
-        self._sauce = sauce
-        self._meat = meat
 
-class Wraps(Mains):
-
-    def __init__(self,ingredients,sauce,meat,wraps):
-        Mains.__init__(ingredients,sauce,meat)
-        self.wraps = wraps
-
-    def wrapType(self,wraps):
-        self._wrap = wraps
-
-
-class Burgers(Mains):
-    def __init__(self,ingredients,sauce,meat,buns):
-        Mains.__init__(ingredients,sauce,meat)
-        self.wraps = buns
+class burgers(ABC):

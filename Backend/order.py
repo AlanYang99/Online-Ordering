@@ -1,4 +1,25 @@
-from mains3 import *
+from mains3 import Ingredients
+from mains3 import Buns
+from mains3 import Vegetables
+from mains3 import Cheese
+from mains3 import Sauce
+from mains3 import Patties
+from mains3 import strips
+from mains3 import Buns
+from mains3 import wraps
+from mains3 import mains
+from mains3 import Burgers
+from mains3 import Wraps
+from mains3 import meals
+from sides1 import sides
+from drinks import drinks
+class food:
+
+    def __init__(self,name,price,amount):
+        self.name = name
+        self.price = price
+        self.amount = amount
+
 
 class Order:
     #operates in the same way as booking

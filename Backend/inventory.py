@@ -1,37 +1,100 @@
 import pickle
-
 class Food:
-    def __init__(self, name, price, amount):
-        self.name = name
-        self.price = price
-        self.amount = amount
+    '''
+    Utility class for ingredients or food in general, which has the
+    attributes: name, price, amount
+    '''
+    def __init__(self,name,price,amount):
+        self._name = name
+        self._price = price
+        self._amount = amount
 
-class Inventory:
+    def __str__(self):
+        return f'{self._name}'
 
-    infile = open("test", "rb")
-    ingredients = pickle.load(infile)
-    infile.close()
+class inventory:
 
-
-    
-
-    @classmethod
-    def addIngredients(cls,name,price,amount):
-        infile = open("test", "rb")
-        ingredients = pickle.load(infile)
-        ingredients.append(Food(name, 2, 3))
+    @staticmethod
+    def get_ingredients():
+        infile = open("ingredients",'rb')
+        inventory = pickle.load(infile)
         infile.close()
-        outfile = open("test", "wb")
-        pickle.dump(ingredients, outfile)
+        return inventory
+
+    @staticmethod
+    def addingredients(name,price,amount):
+        infile = open("ingredients",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        inventory.append(item(name,price,amount))
+        outfile = open("ingredients","wb")
+        pickle.dump(inventory,outfile)
         outfile.close()
 
-    @classmethod
-    def viewList(cls):
-        infile = open("test","rb")
-        cls.ingrediens1 = pickle.load(infile)
+    @staticmethod
+    def get_burgerIngredients():
+        infile = open("burgerIngredients",'rb')
+        inventory = pickle.load(infile)
         infile.close()
-        outfile = open("test", "wb")
-        return cls.ingrediens1
+        return inventory
 
-Inventory.addIngredients("cat",2,1)
-print(Inventory.viewList()[0].name)
+    @staticmethod
+    def addburgerIngredients(name,price,amount):
+        infile = open("burgerIngredients",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        inventory.append(item(name,price,amount))
+        outfile = open("burgerIngredients","wb")
+        pickle.dump(inventory,outfile)
+        outfile.close()
+
+    @staticmethod
+    def get_wrapIngredients():
+        infile = open("wrapIngredients",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        return inventory
+
+    @staticmethod
+    def addwrapIngredients(name,price,amount):
+        infile = open("wrapIngredients",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        inventory.append(item(name,price,amount))
+        outfile = open("wrapIngredients","wb")
+        pickle.dump(inventory,outfile)
+        outfile.close()
+
+    @staticmethod
+    def get_sides():
+        infile = open("sides",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        return inventory
+
+    @staticmethod
+    def addsides(name,price,amount):
+        infile = open("sides",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        inventory.append(item(name,price,amount))
+        outfile = open("sides","wb")
+        pickle.dump(inventory,outfile)
+        outfile.close()
+
+    @staticmethod
+    def get_drinks():
+        infile = open("drinks",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        return inventory
+
+    @staticmethod
+    def adddrinks(name,price,amount):
+        infile = open("drinks",'rb')
+        inventory = pickle.load(infile)
+        infile.close()
+        inventory.append(item(name,price,amount))
+        outfile = open("drinks","wb")
+        pickle.dump(inventory,outfile)
+        outfile.close()
