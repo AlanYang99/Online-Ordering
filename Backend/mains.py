@@ -1,15 +1,14 @@
 from abc import ABC
 
-class item:
+class Food:
     '''
     Utility class for ingredients or food in general, which has the
     attributes: name, price, amount
     '''
-    def __init__(self,name,price,amount,type):
+    def __init__(self,name,price,amount):
         self._name = name
         self._price = price
         self._amount = amount
-        self._type = type
 
     #Changes the str function
     def __str__(self):
@@ -34,7 +33,7 @@ class Ingredients():
     '''
     def set_ingredients(self,ingredient,amount):
         found = 0
-        infile = open("ingredients", "rb")
+        infile = open("Ingredients", "rb")
         ingredients = pickle.load(infile)
         infile.close()
         for i in ingredients:
@@ -61,8 +60,6 @@ class Ingredients():
 #Could just name wrapIngredients and burgeringredients as ingredients and just
 #inherit from Ingredients
 class wrapIngredients:
-
-    Inventory = []
 
     def __init__(self):
         self._wrapIngredients = []
@@ -94,8 +91,6 @@ class wrapIngredients:
         return cost
 
 class burgerIngredients:
-
-    Inventory = []
 
     def __init__(self):
         self._burgerIngredients = []
@@ -132,3 +127,22 @@ class mains(ABC):
         self._ingredients = ingredient
 
 class burgers(ABC):
+
+    def __init__(self,ingredients = None,patties = None,Buns = None):
+        super().__init__(ingredients)
+        self._buns = Buns
+        self._patties = patties
+
+    def getPrice(self):
+        price = 0
+        price += self._ingredients.price
+        price += self._patties.price
+        price += self._buns.price
+        return round(price,2)
+
+    def getIngredients(self):
+        output = ''
+        output += self._ingredients.getIngredients
+        output += self._patties.getIngredients
+        output += self._buns.getIngredients
+        return output
