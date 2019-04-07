@@ -1,4 +1,5 @@
 from abc import ABC
+import pickle
 
 class Food:
     '''
@@ -136,13 +137,11 @@ class burgers(ABC):
     def getPrice(self):
         price = 0
         price += self._ingredients.price
-        price += self._patties.price
-        price += self._buns.price
+        price += self._burgerIngredients.price
         return round(price,2)
 
     def getIngredients(self):
         output = ''
         output += self._ingredients.getIngredients
-        output += self._patties.getIngredients
-        output += self._buns.getIngredients
+        output += self._burgerIngredients.getIngredients
         return output
