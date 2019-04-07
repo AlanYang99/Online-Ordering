@@ -1,18 +1,24 @@
 from abc import ABC
+from inventory import *
+
 class Food:
 
-    def __init__(self,name,amount,price):
+    def __init__(self, name, price, amount):
         self.name = name
-        self.amount = amount
         self.price = price
+        self.amount = amount
+        #self.category = category 
 
     def __str__(self):
-        return f'{self.name} : {self.amount}'
+        return f'{self.name} : {self.amount}\n'
 
-class Ingredients(ABC):
+class Ingredients():
+    
+    def __init__(self):
+        self._ingredients = []
 
     def addIngredients(self,ingredient,price): #move to system.py supposed to be for staff to add new ingredients
-        self._ingredients.append(Food(ingredient,0,price))
+        self._ingredients.append(Food(ingredient, price, 0))
 
     def setIngredients(self,ingredient,amount):
         found = 0
@@ -34,107 +40,83 @@ class Ingredients(ABC):
         output = ''
         for i in self._ingredients:
             output+= i.__str__()
-            output += '\n'
         return output
+
+
+    # @classmethod
+    # def printSauce(cls):
+    #     print(cls.ingredient[0])
+    #     print(cls.ingredient[1])
+
 #Can create another class similar to food, but amount is simply (less,normal,extra)
 #cause 2 lettuce sounds weird
-
-class Vegetables(Ingredients):
-
-    def __init__(self,lettuce = 0,tomato = 0):
-        self._ingredients = [Food('lettuce',lettuce,0.5),Food('tomatoes',tomato,0.3)]
-
-class Cheese(Ingredients):
-
-    def __init__(self,cheddar = 0,feta = 0):
-        self._ingredients = [Food('cheddarcheese',cheddar,0.5),Food('fetacheese',feta,0.3)]
-
-class Sauce(Ingredients):
-
-    ingredient = []
-    def __init__(self,tomato = 0,bbq = 0):
-        self._ingredients = [Food('tomatosauce',tomato,0.5),Food('bbqsauce',bbq,0.3)]
-
-    @classmethod
-    def printSauce(cls):
-        print(cls.ingredient[0])
-        print(cls.ingredient[1])
+#ingredients = [Food('Lettuce', 1, 0), Food('Tomato', 1, 0), Food('Cheese', 1, 0), Food('Onion', 1, 0), Food('Tomato Sauce', 1, 0), Food('Barbecue Sauce', 1, 0)]
 
 class Patties(Ingredients):
 
     def __init__(self,beef = 0,chicken = 0):
-        self._ingredients = [Food('beefpatty',beef,0.5),Food('chickenpatty',chicken,0.3)]
+        self._ingredients = [Food('beefpatty',0.5, beef),Food('chickenpatty', 0.3, chicken)]
 
 class strips(Ingredients):
 
     def __init__(self,chickentender = 0,grilledchicken = 0):
-        self._ingredients = [Food('chickentender',chickentender,0.5),Food('grilledchicken',grilledchicken,0.3)]
+        self._ingredients = [Food('chickentender', 0.5, chickentender),Food('grilledchicken', 0.3, grilledchicken)]
 
 class Buns(Ingredients):
 
     def __init__(self,sesame = 0,muffin = 0):
-        self._ingredients = [Food('sesamebun',sesame,0.5),Food('muffinbun',muffin,0.3)]
+        self._ingredients = [Food('sesamebun',0.5, sesame),Food('muffinbun',0.3, muffin)]
 
 class wraps(Ingredients):
 
     def __init__(self,tortilla = 0,flatbread = 0):
-        self._ingredients = [Food('tortillawrap',tortilla,0.5),Food('flatbread',flatbread,0.3)]
+        self._ingredients = [Food('tortillawrap', 0.5, tortilla),Food('flatbread',0.3, flatbread)]
 
 class mains(ABC):
 
-    def __init__(self,vegetables,cheese,sauce):
-        self._vegetables = vegetables
-        self._cheese = cheese
-        self._sauce = sauce
+    def __init__(self, Ingredients = None):
+        self._ingredients = Ingredients
 
 class Burgers(mains):
 
-    def __init__(self,vegetables = None,cheese = None ,sauce = None,patties = None,buns = None):
-        super().__init__(vegetables,cheese,sauce)
+    def __init__(self,Ingredients = None,patties = None,Buns = None):
+        super().__init__(Ingredients)
+        self._buns = Buns
         self._patties = patties
-        self._buns = buns
 
     def getPrice(self):
         price = 0
-        price += self._vegetables.getPrice()
-        price += self._cheese.getPrice()
-        price += self._sauce.getPrice()
+        price += self._ingredients.getPrice()
         price += self._patties.getPrice()
         price += self._buns.getPrice()
-        return price
+        return round(price,2)
 
     def getIngredients(self):
         output = ''
-        output += self._vegetables.getIngredients()
-        output += self._cheese.getIngredients()
-        output += self._sauce.getIngredients()
+        output += self._ingredients.getIngredients()
         output += self._patties.getIngredients()
         output += self._buns.getIngredients()
         return output
 
 class Wraps(mains):
 
-    def __init__(self,vegetables = None,cheese = None ,sauce = None,strips = None,wraps = None):
-        super().__init__(vegetables,cheese,sauce)
-        self._strips = strips
-        self._wraps = wraps
+    def __init__(self,Ingredients = None, Strips = None, Wraps = None):
+        super().__init__(Ingredients)
+        self._wraps = Wraps
+        self._strips = Strips
 
     def getPrice(self):
         price = 0
-        price += self._vegetables.getPrice()
-        price += self._cheese.getPrice()
-        price += self._sauce.getPrice()
+        price += self._ingredients.getPrice()
         price += self._strips.getPrice()
         price += self._wraps.getPrice()
-        return price
+        return round(price,2)
 
     def getIngredients(self):
         output = ''
-        output += self._vegetables.getIngredients()
-        output += self._cheese.getIngredients()
-        output += self._sauce.getIngredients()
+        output += self._ingredients.getIngredients()
         output += self._strips.getIngredients()
-        #output += self._wraps.getIngredients()
+        output += self._wraps.getIngredients()
         return output
 
 class meals:
@@ -167,24 +149,46 @@ class meals:
             price += i.getPrice()
         return price
 
-Veg1 = Vegetables(1,2)
-Cheese1 = Cheese(1,2)
-Sauce1 = Sauce(1,2)
+# Veg1 = Vegetables(1,2)
+# Cheese1 = Cheese(1,2)
+# Sauce1 = Sauce(1,2)
+ings = Ingredients()
+ings.addIngredients('Lettuce', 1)
+ings.addIngredients('Tomato', 1)
+ings.addIngredients('Onion', 1)
+ings.setIngredients('Tomato', 3)
+
+
 Patties1 = Patties(1,2)
 Buns1 = Buns(1,2)
 tender1 = strips(1,2)
 wraps1 = wraps(1,2)
+print()
+burger1 = Burgers(ings,Patties1, Buns1)
+wrap1 = Wraps(ings, tender1, wraps1)
+
+meal = meals()
+meal.addBurger(burger1)
+meal.addWrap(wrap1)
+
+
+print(burger1.getIngredients())
+print(burger1.getPrice())
+print(wrap1.getIngredients())
+print(wrap1.getPrice())
+print(meal.displayMains())
+print(meal.price())
 
 #print(help(Veg1))
-Veg1.addIngredients('Pumpkin',0.4)
-Veg1.setIngredients('Pumpkin',3)
+#Veg1.addIngredients('Pumpkin',0.4)
+#Veg1.setIngredients('Pumpkin',3)
 
-Burger1 = Burgers(Veg1,Cheese1,Sauce1,Patties1,Buns1)
-Wrap1 = Wraps(Veg1,Cheese1,Sauce1,tender1,wraps1)
+#Burger1 = Burgers(Veg1,Cheese1,Sauce1,Patties1,Buns1)
+#Wrap1 = Wraps(Veg1,Cheese1,Sauce1,tender1,wraps1)
 """
 print(Burger1.getIngredients())
 print('Price = ')
-print(Burger1.getPrice())
+print(Burger1.getPrice()
 
 print(Wrap1.getIngredients())
 print('Price = ')
