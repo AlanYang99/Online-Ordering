@@ -1,18 +1,19 @@
-from mains3 import Sauce
-from mains3 import Ingredients
-from mains3 import Food
+from mains3 import *
+from inventory import *
 
-#Create others
-def addSauce(sauce1):
-    Sauce.ingredient.append(sauce1)
 
-#Testing adding new items functions
-sauce = Food('mayo',0,0.4)
-sauce1 = Food('chilli',0,0.3)
-addSauce(sauce)
-#Sauce.printSauce()
-addSauce(sauce1)
-Sauce.printSauce()
+
+# #Create others
+# def addSauce(sauce1):
+#     Sauce.ingredient.append(sauce1)
+
+# #Testing adding new items functions
+# sauce = Food('mayo',0,0.4)
+# sauce1 = Food('chilli',0,0.3)
+# addSauce(sauce)
+# #Sauce.printSauce()
+# addSauce(sauce1)
+# Sauce.printSauce()
 
 
 #For make order function, should take in same parameters as order1

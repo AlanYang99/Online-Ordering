@@ -1,3 +1,5 @@
+import pickle
+
 class Inventory:
     #dont have to do updating inventory
     def __init__(self, buns, wraps, patties, ingredients, sides, drinks):
@@ -304,3 +306,8 @@ inventory.add_side(soft_serve)
 inventory.add_drink(cola)
 inventory.add_drink(fanta)
 inventory.add_drink(sprite)
+
+filename = "inventory"
+outfile = open(filename,"wb")
+pickle.dump(inventory, outfile)
+outfile.close()
