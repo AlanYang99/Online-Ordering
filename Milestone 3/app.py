@@ -14,15 +14,6 @@ def home():
 
 
 '''
-Ordering Mains
-'''
-@app.route("/mains")
-def order_mains():
-    return render_template('sides.html')
-
-
-
-'''
 Ordering Sides
 '''
 from src.side import Sides
@@ -48,9 +39,9 @@ def order_sides():
 '''
 Ordering Drinks
 '''
-@app.route("/")
+@app.route("/drinks", methods=["GET", "POST"])
 def order_drinks():
-    return render_template('sides.html')
+    return render_template('drinks.html')
 
 
 
