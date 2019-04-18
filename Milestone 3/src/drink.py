@@ -1,7 +1,7 @@
 from inventory1 import Food
 import pickle
 
-class drinks():
+class Drinks():
 
     def __init__(self):
         self._drinks = []

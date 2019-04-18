@@ -5,7 +5,7 @@ class Food:
         self.price = price
         self.amount = amount
 
-class sides:
+class Sides:
 
     def __init__(self):
         self.fries = [Food('smallfries',2,0),Food('mediumfries',3,0),Food('largefries',4,0)]

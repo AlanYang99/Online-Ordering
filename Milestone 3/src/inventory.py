@@ -15,7 +15,7 @@ class Food:
     def __repr__(self):
         return f'{self._name},{self._price},{self._amount}'
 
-class inventory:
+class Inventory:
 
     @staticmethod
     def get_ingredients():

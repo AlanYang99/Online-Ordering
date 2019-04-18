@@ -11,7 +11,7 @@ class Order:
         self._drinks = drinks
 
     @property
-    def totalCost(self):
+    def total_cost(self):
         price = 0
         price += self._mains.price
         price += self._sides.price
@@ -19,7 +19,7 @@ class Order:
         return price
 
     @property
-    def printTotal(self):
+    def print_total(self):
         output = ''
         output += self._mains.displayMains
         output += self._drinks.get_drinks
