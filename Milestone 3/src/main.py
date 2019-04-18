@@ -1,5 +1,5 @@
 from abc import ABC
-from inventory import Food
+from src.inventory import Food
 import pickle
 
 # class Food:

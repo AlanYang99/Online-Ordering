@@ -19,45 +19,47 @@ class Inventory:
 
     @staticmethod
     def get_ingredients():
-        infile = open("Ingredients",'rb')
+        infile = open("src/Ingredients",'rb')
         inventory = pickle.load(infile)
         infile.close()
         return inventory
 
     @staticmethod
     def get_ingredients1():
-        infile = open("Ingredients1",'rb')
+        infile = open("src/Ingredients1",'rb')
         inventory = pickle.load(infile)
         infile.close()
         return inventory
+
     @staticmethod
     def get_burgerIngredients():
-        infile = open("burgerIngredients",'rb')
+        infile = open("src/burgerIngredients",'rb')
         inventory = pickle.load(infile)
         infile.close()
         return inventory
 
     @staticmethod
     def get_wrapIngredients():
-        infile = open("wrapIngredients",'rb')
+        infile = open("src/wrapIngredients",'rb')
         inventory = pickle.load(infile)
         infile.close()
         return inventory
 
     @staticmethod
     def get_sides():
-        infile = open("src.sides",'rb')
+        infile = open('src/sides','rb') 
         inventory = pickle.load(infile)
         infile.close()
         return inventory
 
     @staticmethod
     def get_drinks():
-        infile = open("drinks",'rb')
+        infile = open("src/drinks",'rb')
         inventory = pickle.load(infile)
         infile.close()
         return inventory
 
+#inventory=Inventory()
 #print(inventory.get_ingredients())
 #print(inventory.get_burgerIngredients())
 #print(inventory.get_wrapIngredients())

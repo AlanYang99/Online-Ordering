@@ -1,4 +1,4 @@
-from inventory import Food
+from src.inventory import Food
 import pickle
 
 class Sides():
