@@ -1,24 +1,59 @@
-from flask import Flask, render_template
-from src.side import Sides, side1
-from src.system import orders
+#!/usr/bin/env python3
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
-
+app.secret_key = 'very-secret-123'  # Used to add entropy
+'''
+Home Page
+'''
 @app.route("/")
 def home():
-    return render_template('layout.html')
+    return render_template('sides.html')
 
-@app.route("/sides", methods=["POST"])
+
+
+
+'''
+Ordering Mains
+'''
+@app.route("/mains")
+def order_mains():
+    return render_template('sides.html')
+
+
+
+'''
+Ordering Sides
+'''
+from src.side import Sides
+from src.inventory import Inventory
+@app.route("/sides", methods=["GET", "POST"])
 def order_sides():
-    sides = Sides()
+    ordered_sides = Sides()
+    inventory = Inventory()
+    available_sides = inventory.get_sides()
+    print(available_sides)
 
     if request.method == "POST":
-        for item in sides.get_sides(): # not a list, its a string so im not sure about this
+        for item in available_sides: 
             num_side = request.form.get(item)
-            if side is not '':
-                sides.set_sides(item,num_side)
+            if num_side is not '':
+                ordered_sides.set_sides(item,num_side)
+        print(ordered_sides.get_sides)
 
-    return render_template('sides.html',sides=sides.get_sides())
+    return render_template('sides.html',sides=available_sides)
+
+
+
+'''
+Ordering Drinks
+'''
+@app.route("/")
+def order_drinks():
+    return render_template('sides.html')
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

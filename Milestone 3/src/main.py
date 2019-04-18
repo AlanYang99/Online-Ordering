@@ -131,7 +131,7 @@ class Mains(ABC):
     def __init__(self,ingredient):
         self._ingredients = ingredient
 
-class Burgers(mains):
+class Burgers(Mains):
 
     def __init__(self,ingredients = None,burgerIngredients = None):
         super().__init__(ingredients)
@@ -151,7 +151,7 @@ class Burgers(mains):
         output += self._burgerIngredients.get_burgerIngredients
         return output
 
-class Wraps(mains):
+class Wraps(Mains):
 
     def __init__(self,ingredients = None,wrapIngredients = None):
         super().__init__(ingredients)

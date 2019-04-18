@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GourmetBurger!</title>
+</head>
+
+<body>
+
+<!-- Tab Menu -->
+<a href="{{ url_for('order_mains') }}">Mains</a>
+<a href="{{ url_for('order_sides') }}">Sides</a>
+<a href="{{ url_for('order_drinks') }}">Drinks</a>
+<a href="{{ url_for('order_checkout') }}">Checkout</a>
+<br>
+
+<!-- Main Content -->
+{% block body %}{% endblock %}
+
+</body>
+</html>

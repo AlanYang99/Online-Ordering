@@ -46,7 +46,7 @@ class Inventory:
 
     @staticmethod
     def get_sides():
-        infile = open("sides",'rb')
+        infile = open("src.sides",'rb')
         inventory = pickle.load(infile)
         infile.close()
         return inventory
@@ -58,8 +58,8 @@ class Inventory:
         infile.close()
         return inventory
 
-print(inventory.get_ingredients())
-print(inventory.get_burgerIngredients())
-print(inventory.get_wrapIngredients())
-print(inventory.get_sides())
-print(inventory.get_drinks())
+#print(inventory.get_ingredients())
+#print(inventory.get_burgerIngredients())
+#print(inventory.get_wrapIngredients())
+#print(inventory.get_sides())
+#print(inventory.get_drinks())
