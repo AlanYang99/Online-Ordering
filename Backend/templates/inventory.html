@@ -4,9 +4,14 @@
     <title>Inventory</title>
 </head>
 <body>
-    {% for post in posts %}
-        <p>{{ post.name }} x {{ post.amount }}</p>
-        <p>price is {{ post.price }}</p>
-    {% endfor %}
+    <Form align="centre" method="POST">
+        {% for post in posts %}
+            <p>
+                {{ post.name }} x {{ post.amount }}
+                <input type="text" placeholder="Insert amount to add to Inventory" name="amount">
+                <button type="submit" name="cod" value="Add">Add</button>
+            </p>
+        {% endfor %}
+    </Form>
 </body>
 </html>

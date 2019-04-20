@@ -2,6 +2,12 @@ from flask import render_template, request, redirect, url_for, abort
 from server import app
 from datetime import datetime
 
+#loading in pickles
+# found = 0
+# infile = open("burgerIngredients", "rb")
+# posts = pickle.load(infile)
+# infile.close()
+
 posts = [
     {
         'test': '1',
