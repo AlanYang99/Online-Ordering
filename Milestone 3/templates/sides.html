@@ -2,7 +2,7 @@
 {% block body %}
     <form method = "POST">
         {% for side in sides%}
-            <p><label>{{side}} </label><input name={{side}} type=number/></p>
+            <p><label>{{side}} </label><input name={{side}} type='number'/></p>
         {% endfor %}
         <p><input type='submit' name='button' value='Checkout'></p>
     </form>

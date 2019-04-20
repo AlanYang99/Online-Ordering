@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 {% block body %}
-    <!-- 
-    {% raw %}
     <form method = "POST">
-        {% for side in sides%}
-            <p><label>{{side}} </label><input name={{side}} type=number/></p>
+        {% for drink in drinks %}
+            <p><label>{{drink}} </label><input name={{drink}} type=number/></p>
         {% endfor %}
         <p><input type='submit' name='button' value='Checkout'></p>
     </form>
-    {% endraw %}
-    -->
+
 {% endblock %}
