@@ -1,27 +1,33 @@
 from flask import render_template, request, redirect, url_for, abort
 from server import app
 from datetime import datetime
+from inventory1 import Food
+import pickle
 
 #loading in pickles
-# found = 0
-# infile = open("burgerIngredients", "rb")
-# posts = pickle.load(infile)
-# infile.close()
+infile = open("burgerIngredients", "rb")
+inventory = pickle.load(infile)
+infile.close()
 
-posts = [
-    {
-        'test': '1',
-        'name': 'brioche',
-        'price': '$1',
-        'amount': '100',
-    },
-    {
-        'test': '2',
-        'name': 'sesame',
-        'price': '$1.50',
-        'amount': '50',
-    }
-]
+posts = []
+
+for i in inventory:
+    posts.append(Food(i._name, i._price, i._amount))
+
+# posts = [
+#     {
+#         'test': '1',
+#         'name': 'brioche',
+#         'price': '$1',
+#         'amount': '100',
+#     },
+#     {
+#         'test': '2',
+#         'name': 'sesame',
+#         'price': '$1.50',
+#         'amount': '50',
+#     }
+# ]
 
 @app.route("/")
 #@app.route("/inventory")
