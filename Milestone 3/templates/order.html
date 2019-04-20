@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Complete Order {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        li a:hover:not(.Order) {
+          background-color: #ddd;
+        }
+
+        li a.Order {
+          color: white;
+          background-color: #DC143C;
+        }
+
+    </style>
+
+{% endblock %}

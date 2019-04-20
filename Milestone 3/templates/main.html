@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Order Mains {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        li a:hover:not(.Main) {
+          background-color: #ddd;
+        }
+
+        li a.Main {
+          color: white;
+          background-color: #DC143C;
+        }
+
+    </style>
+
+{% endblock %}

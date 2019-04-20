@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Order Drinks {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        li a:hover:not(.Drink) {
+          background-color: #ddd;
+        }
+
+        li a.Drink {
+          color: white;
+          background-color: #DC143C;
+        }
+
+
+
+    </style>
+
+{% endblock %}
+{% block content %}
+{% endblock %}
