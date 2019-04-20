@@ -1,12 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
+    <h1>
+        Inventory
+    </h1>
+
     <Form align="centre" method="POST">
-        {% for post in posts %}
-            <p>
-                {{ post._name }} x {{ post._amount }}
-                <input type="text" placeholder="Insert amount to add to Inventory" name="amount">
-                <button type="submit" name="cod" value="Add">Add</button>
-            </p>
-        {% endfor %}
+        <div class="form-group">
+            {% for post in posts %}
+                <p>
+                    {{ post._name }} x {{ post._amount }}
+                    <input type="text" placeholder="Amount to add to stock" name="amount">
+                    <button type="submit" name="cod" value="Add" class="btn btn-primary">Add</button>
+                </p>
+            {% endfor %}
+        </div>
     </Form>
 {% endblock content %}

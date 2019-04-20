@@ -4,16 +4,45 @@ from datetime import datetime
 from inventory1 import Food
 import pickle
 
+posts = []
+
 #loading in pickles
 infile = open("burgerIngredients", "rb")
 inventory = pickle.load(infile)
 infile.close()
 
-posts = []
+for i in inventory:
+    posts.append(Food(i._name, i._price, i._amount))
+
+infile = open("wrapIngredients", "rb")
+inventory = pickle.load(infile)
+infile.close()
 
 for i in inventory:
     posts.append(Food(i._name, i._price, i._amount))
 
+infile = open("Ingredients", "rb")
+inventory = pickle.load(infile)
+infile.close()
+
+for i in inventory:
+    posts.append(Food(i._name, i._price, i._amount))
+
+infile = open("sides", "rb")
+inventory = pickle.load(infile)
+infile.close()
+
+for i in inventory:
+    posts.append(Food(i._name, i._price, i._amount))
+
+infile = open("drinks", "rb")
+inventory = pickle.load(infile)
+infile.close()
+
+for i in inventory:
+    posts.append(Food(i._name, i._price, i._amount))
+
+#dummy code foe testing
 # posts = [
 #     {
 #         'test': '1',
@@ -29,9 +58,13 @@ for i in inventory:
 #     }
 # ]
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 #@app.route("/inventory")
 def inventory():
+    if request.method == 'POST':
+        increment = request.form['amount']
+        #run add_ingredients here
+        return render_template('inventory.html', posts=posts)
     return render_template('inventory.html', posts=posts)
 
 # '''
