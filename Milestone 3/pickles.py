@@ -1,21 +1,22 @@
-import pickle
+#import pickle
+import dill as pickle
 
 empty_list = []
-outfile = open("Ingredients","wb")
+outfile = open("IngredientsD","wb")
 pickle.dump(empty_list,outfile)
 outfile.close()
-outfile = open("Ingredients1","wb")
+outfile = open("Ingredients1D","wb")
 pickle.dump(empty_list,outfile)
 outfile.close()
-outfile = open("wrapIngredients","wb")
+outfile = open("wrapIngredientsD","wb")
 pickle.dump(empty_list,outfile)
 outfile.close()
-outfile = open("burgerIngredients","wb")
+outfile = open("burgerIngredientsD","wb")
 pickle.dump(empty_list,outfile)
 outfile.close()
-outfile = open("sides","wb")
+outfile = open("sidesD","wb")
 pickle.dump(empty_list,outfile)
 outfile.close()
-outfile = open("drinks","wb")
+outfile = open("drinksD","wb")
 pickle.dump(empty_list,outfile)
 outfile.close()
