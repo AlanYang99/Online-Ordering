@@ -1,6 +1,6 @@
 from main import *
 from inventory import Food
-import pickle
+import dill as pickle
 
 class Order:
     #operates in the same way as booking

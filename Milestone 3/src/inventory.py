@@ -1,4 +1,6 @@
-import pickle
+#import pickle
+import dill as pickle
+
 class Food:
     '''
     Utility class for ingredients or food in general, which has the
@@ -48,9 +50,9 @@ class Inventory:
     @staticmethod
     def get_sides():
         infile = open('src/sides','rb') 
-        inventory = pickle.load(infile)
+        sides = pickle.load(infile)
         infile.close()
-        return inventory
+        return sides
 
     @staticmethod
     def get_drinks():

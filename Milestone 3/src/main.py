@@ -1,6 +1,6 @@
 from abc import ABC
 from src.inventory import Food
-import pickle
+import dill as pickle
 
 # class Food:
 #     '''
