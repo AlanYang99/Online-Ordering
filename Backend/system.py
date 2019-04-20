@@ -1,8 +1,5 @@
 from flask import render_template, request, redirect, url_for, abort
 from server import app, system
-from src.location import Location
-from src.forms import ParseError, BookingForm
-from src.customer import Customer
 import pickle
 import datetime
 from order import *

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory</title>
+</head>
+<body>
+    {% for post in posts %}
+        <p>{{ post.name }} x {{ post.amount }}</p>
+        <p>price is {{ post.price }}</p>
+    {% endfor %}
+</body>
+</html>
