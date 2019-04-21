@@ -1,4 +1,4 @@
-import dill as pickle
+import pickle
 import datetime
 from order import *
 from main import *
@@ -25,12 +25,12 @@ class Orders:
     def __init__(self):
         self._orders = []
 
-    def delete_order(self,id):
+    def deleteOrder(self,id):
         for order in self._orders:
             if order._id is order:
                 self._orders.remove(order)
 
-    def get_order(self,id):
+    def getOrder(self,id):
         for order in self._orders:
             if order._id is order:
                 return order

@@ -1,6 +1,6 @@
 from main import *
 from inventory import Food
-import dill as pickle
+import pickle
 
 class Order:
     #operates in the same way as booking
@@ -12,7 +12,7 @@ class Order:
 
 
     @property
-    def total_cost(self):
+    def totalCost(self):
         price = 0
         price += self._mains.price
         price += self._sides.price
@@ -20,7 +20,7 @@ class Order:
         return price
 
     @property
-    def print_total(self):
+    def printTotal(self):
         output = ''
         if(self._mains != None):
             output += self._mains.displayMains
