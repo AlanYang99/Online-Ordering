@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %} Make your own wrap {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        li a:hover:not(.Create) {
+          background-color: #ddd;
+        }
+
+        li a.Create {
+          color: white;
+          background-color: #DC143C;
+        }
+
+        #ord select {
+            width: 75%;
+        }
+        
+    </style>
+
+
+{% endblock %}
+<br>
+{% block content %}
+<br>
+<h1 align = center> Design your Gourmet Wrap</h1>
+<form id = "amount" method = "POST" align = "center">
+    <table align = "center" id = "ord">
+        <tr>
+            <th>Ingredient</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+
+        {% for ingredient in ingredient_list3 %}
+        <tr>
+            <td>{{ ingredient._name }}</td>
+            <td>{{ ingredient._price }}</td>
+            <td><select name = "{{ ingredient._name }}" form = "amount" method = "POST">
+                <option value= "0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select></td>
+        </tr>
+    {% endfor %}
+        {% for ingredient in ingredient_list %}
+            <tr>
+                <td>{{ ingredient._name }}</td>
+                <td>{{ ingredient._price }}</td>
+                <td><select name = "{{ ingredient._name }}" form = "amount" method = "POST">
+                    <option value= "0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></td>
+            </tr>
+        {% endfor %}
+
+        {% for ingredient in ingredient_list2 %}
+        <tr>
+            <td>{{ ingredient._name }}</td>
+            <td>{{ ingredient._price }}</td>
+            <td><select name = "{{ ingredient._name }}" form = "amount" method = "POST">
+                <option value= "0">None</option>
+                <option value="1">Little</option>
+                <option value="2">Normal</option>
+                <option value="3">Extra</option>
+            </select></td>
+        </tr>
+        {% endfor %}
+        <td>Number of Wraps to be purchased</td>
+        <td colspan = "2"><input type = "number" name = "quantity"
+            value = "1" min = "1" max = "15">
+
+
+    </table>
+
+    <input type = "submit" class = "button" value = "Add to Order">
+    </form>
+{% endblock %}
