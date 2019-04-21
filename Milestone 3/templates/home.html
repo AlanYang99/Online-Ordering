@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %} Homepage {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        li a:hover:not(.Home) {
+          background-color: #ddd;
+        }
+
+        li a.Home {
+          color: white;
+          background-color: #DC143C;
+        }
+        h1.message{
+            font-size : 300% ;
+        }
+    </style>
+
+{% endblock %}
+{% block content %}
+<br><br><br><br>
+<br><br><br><br>
+<h1 align = "center" class = "message"> Welcome to Asian Mcdonalds </h1>
+
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} Order Drinks {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        li a:hover:not(.Create) {
+          background-color: #ddd;
+        }
+
+        li a.Create {
+          color: white;
+          background-color: #DC143C;
+        }
+
+    </style>
+
+{% endblock %}
+{% block content %}
+<br>
+<h1 align = center>Would You like to Order a Burger or a Wrap</h1>
+<div align = "center">
+<a href = {{ url_for('make_burger')}}>
+<img src = "https://www.kitchensanctuary.com/wp-content/uploads/2017/08/
+Crispy-Chicken-Burger-with-Honey-Mustard-Coleslaw-recipe-square-FS.jpg"
+width = "400" height = "400" float = "center" border = "2px solid #4CAF50">
+</a>
+<a href = {{ url_for('make_wrap')}}>
+<img src = "https://www.landolakes.com/RecipeManagementSystem/media/
+Recipe-Media-Files/Recipes/Retail/x17/18745-italian-chicken-wraps-600x600.jpg?ext=.jpg"
+width = "400" height = "400" float = "center" border = "2px solid #4CAF50">
+</a>
+</div>
+{% endblock %}
