@@ -160,7 +160,6 @@ if __name__ == '__main__':
 
 '''
 Questions to ask Ian
-1. Doing the project (Iteration3) solo
 2. About the ingredients, for example sundae is made up of chocolate topping and
    ice-cream, is it possible if I decrement an inventory object called Chocolate Sundae
    or do  i need to decrement the ingredients used to make a sundae (ice-cream, topping)
