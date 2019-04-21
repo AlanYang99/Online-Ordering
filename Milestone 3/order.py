@@ -22,10 +22,13 @@ class Order:
     @property
     def totalCost(self):
         price = 0
-        price += self._mains.price
-        price += self._sides.price
-        price += self._drinks.price
-        return price
+        if(self._mains != None):
+            price += self._mains.price
+        if(self._sides != None):
+            price += self._sides.price
+        if(self._drinks != None):
+            price += self._drinks.price
+        return round(price,2)
 
     @property
     def printTotal(self):

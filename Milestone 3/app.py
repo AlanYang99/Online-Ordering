@@ -8,6 +8,7 @@ from order import Order
 from main import *
 
 app = Flask(__name__)
+app.secret_key = "ed1f3de267e251db"
 
 side1 = sides()
 drink1 = drinks()

@@ -58,4 +58,9 @@
         {% endfor %}
     {% endif %}
 </table>
+<br>
+<h2 align = center> Total Price is ${{order.totalCost}}</h2>
+<form id = "order" method = "POST" align = "center">
+<input type = "submit" class = "button" value = "Purchase Order">
+</form>
 {% endblock %}

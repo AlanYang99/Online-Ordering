@@ -20,7 +20,7 @@ class OrderID:
     def update_status(self,status):
         self._status = status
 
-class Orders:
+class OrderList:
 
     def __init__(self):
         self._orders = []
@@ -36,11 +36,8 @@ class Orders:
                 return order
         return None
 
-    def make_order(self,mains,sides,drinks):
-
-        #Checking if available ingredients 1st
-        new_order = Order(mains,sides,drinks)
-        self._orders.append(new_order)
+    def add_order(self,order):
+        self._orders.append(order)
 
 def add_ingredients(name,price,amount,ingredient_type):
     infile = open(ingredient_type,'rb')
