@@ -5,11 +5,19 @@ import pickle
 class Order:
     #operates in the same way as booking
     #takes in 3 parameters - drinks, mains, sides, self
-    def __init__ (self, mains = None,sides = None, drinks = None):
-        self._mains = mains
-        self._sides = sides
-        self._drinks = drinks
+    def __init__ (self):
+        self._mains = None
+        self._sides = None
+        self._drinks = None
 
+    def set_mains(self,mains):
+        self._mains = mains
+
+    def set_sides(self,sides):
+        self._sides = sides
+
+    def set_drinks(self,drinks):
+        self._drinks = drinks
 
     @property
     def totalCost(self):

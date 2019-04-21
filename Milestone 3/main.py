@@ -140,9 +140,11 @@ class mains(ABC):
 
 class burgers(mains):
 
-    def __init__(self,ingredients = None,burgerIngredients = None):
+    def __init__(self,ingredients = None,burgerIngredients = None,amount = 0):
         super().__init__(ingredients)
         self._burgerIngredients = burgerIngredients
+        self._amount = amount #The amount of burgers a customer has orderd
+                              #with the same product
 
     @property
     def price(self):
@@ -162,11 +164,14 @@ class burgers(mains):
             output += self._burgerIngredients.get_burgerIngredients
         return output
 
+
+
 class wraps(mains):
 
-    def __init__(self,ingredients = None,wrapIngredients = None):
+    def __init__(self,ingredients = None,wrapIngredients = None,amount = 0):
         super().__init__(ingredients)
         self._wrapIngredients = wrapIngredients
+        self._amount = amount
 
     @property
     def price(self):
@@ -198,10 +203,10 @@ class meals:
     def displayMains(self):
         output = ''
         for i in self._burgers:
-            output+= 'Plain burger:\n'
+            output+= f'{i._amount}x Plain burger:\n'
             output+= f' {i.getIngredients}'
         for i in self._wraps:
-            output+= 'Plain wrap:\n'
+            output+= f'{i._amount}x Plain wrap:\n'
             output+= f' {i.getIngredients}'
         return output
 

@@ -11,6 +11,8 @@ app = Flask(__name__)
 
 side1 = sides()
 drink1 = drinks()
+meal1 = meals()
+order1 = Order()
 
 
 @app.route("/")
@@ -73,9 +75,10 @@ def getSides():
         #do a if statement, if get_inventory , item is = fries, and decrement for large, medium small subsequently
 
     global order1
+    order1.set_sides(side1)
     if(side1._sides == []):
         return "No Side Purchases"
-    return Order(None,side1,drink1).printTotal
+    return order1.printTotal
 
 @app.route("/drinks/", methods = ['POST','GET'])
 def getDrinks():
@@ -96,10 +99,10 @@ def getDrinks():
         #do a if statement, if get_inventory , item is = fries, and decrement for large, medium small subsequently
 
     global order1
-
+    order1.set_drinks(drink1)
     if(drink1._drinks == []):
         return "<h1>You made no Side Orders</h1>"
-    return Order(None,side1,drink1).printTotal
+    return order1.printTotal
 
 @app.route("/create-your-own/burger/", methods = ['POST','GET'])
 def make_burger():
@@ -119,16 +122,37 @@ def make_burger():
                 burg1.set_burgerIngredients(state,int(capital))
         #print(ingr1.getIngredients)
         #print(burg1.get_burgerIngredients)
-        burge1 = burgers(ingr1,burg1)
+        global meal1
+        meal1.addBurger(burgers(ingr1,burg1,quantity_list['quantity']))
+        global order1
+        order1.set_mains(meal1)
     #    print(burge1.getIngredients)
-    return burge1.getIngredients
+    return order1.printTotal
 
 @app.route("/create-your-own/wrap/", methods = ['POST','GET'])
 def make_wrap():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
-        print(quantity_list)
-    return "Hello"
+        wrap1 = wrapIngredients()
+        ingr1 = Ingredients()
+        i = 0
+        for state, capital in quantity_list.items():
+            i+=1
+            print(i)
+            if(not(capital.isdigit()) or int(capital) == 0):
+                continue
+            if(i >= 6):
+                ingr1.set_ingredients(state,int(capital))
+            else:
+                wrap1.set_wrapIngredients(state,int(capital))
+        #print(ingr1.getIngredients)
+        #print(burg1.get_burgerIngredients)
+        global meal1
+        meal1.addWrap(wraps(ingr1,wrap1,quantity_list['quantity']))
+        global order1
+        order1.set_mains(meal1)
+    #    print(burge1.getIngredients)
+    return order1.printTotal
 
 if __name__ == '__main__':
     app.run(debug=True)
