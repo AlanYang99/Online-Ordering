@@ -28,9 +28,9 @@ class Order:
         if(self._mains != None):
             output += self._mains.displayMains
         if(self._drinks != None):
-            output += self._drinks.get_drinks()
+            output += self._drinks.get_drinks
         if(self._sides != None):
-            output += self._sides.get_sides()
+            output += self._sides.get_sides
         if(output == ''):
             return "No Orders Currently Made"
         return output
