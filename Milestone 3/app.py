@@ -76,15 +76,23 @@ def staff():
     return render_template('staff.html',order_list = sys._orders)
 
 #Thanks to lab08
-@app.route("/staff/<id>",methods = ['POST','GET'])
+@app.route("/staff/<id>/")
 def access_orders(id):
-    print(id)
     order = sys.get_order(id)
 
     if (order == None):
         return redirect(url_for('page_not_found'))
 
     return render_template('Order_details.html',order = order)
+
+@app.route("/staff/<id>/",methods = ['POST','GET'])
+def update_orders(id):
+    if "update" in request.form:
+        sys.update_status(id)
+        return redirect(url_for('access_orders',id = id))
+    elif "delete" in request.form:
+        sys.delete_order(id)
+        return redirect(url_for('staff'))
 
 #when making the order ensure self._sides, self._drinks are all reseted
 @app.route("/sides/", methods = ['POST','GET'])
@@ -186,9 +194,10 @@ def make_order():
     global order1
     sys.make_booking(order1)
     order1 = Order()
-    side1 = sides()
-    drink1 = drinks()
-    meal1 = meals()
+    side1._sides = []
+    drink1._drinks = []
+    meal1._burgers = []
+    meal1._wraps = []
     return redirect(url_for('purchased'))
 
 if __name__ == '__main__':

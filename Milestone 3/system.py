@@ -30,6 +30,18 @@ class OrderSystem:
                 return order
         return None
 
+    def delete_order(self,id):
+        i = 0
+        for order in self._orders:
+            if(str(order._id) == str(id)):
+                break
+            i+=1
+        del self._orders[i]
+
+    def update_status(self,id):
+        for order in self._orders:
+            if(str(order._id) == str(id)):
+                order._status = 'Ready to be collected'
         # global side1
         # global drink1
         # global order1
