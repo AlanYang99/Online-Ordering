@@ -24,4 +24,4 @@ def get_inventory(inventory_type):
     infile.close()
     return inventory
 # print(get_inventory("Ingredients"))
-print(get_inventory("Ingredients1"))
+# print(get_inventory("Ingredients1"))

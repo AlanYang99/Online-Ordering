@@ -117,10 +117,11 @@ def make_burger():
                 ingr1.set_ingredients(state,int(capital))
             else:
                 burg1.set_burgerIngredients(state,int(capital))
-        print(ingr1.getIngredients)
-        print(burg1.get_burgerIngredients)
-
-    return "Hello"
+        #print(ingr1.getIngredients)
+        #print(burg1.get_burgerIngredients)
+        burge1 = burgers(ingr1,burg1)
+    #    print(burge1.getIngredients)
+    return burge1.getIngredients
 
 @app.route("/create-your-own/wrap/", methods = ['POST','GET'])
 def make_wrap():
