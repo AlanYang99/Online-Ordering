@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form method = "POST">
+        {% for drink in drinks %}
+            <p><label>{{drink}} </label><input name={{drink}} type=number/></p>
+        {% endfor %}
+        <p><input type='submit' name='button' value='Checkout'></p>
+    </form>
+
+{% endblock %}

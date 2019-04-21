@@ -2,7 +2,7 @@ from inventory import Food
 from Utility import haveItem
 import pickle
 
-class drinks():
+class Drinks():
 
     def __init__(self):
         self._drinks = []
