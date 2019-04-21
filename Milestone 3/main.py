@@ -153,7 +153,8 @@ class burgers(mains):
             price += self._ingredients.price
         if(self._burgerIngredients != None):
             price += self._burgerIngredients.price
-        return round(price,2)
+        price*= int(self._amount)
+        return (round(price,2))
 
     @property
     def getIngredients(self):
@@ -178,6 +179,7 @@ class wraps(mains):
         price = 0
         price += self._ingredients.price
         price += self._wrapIngredients.price
+        price *= int(self._amount)
         return round(price,2)
 
     @property

@@ -49,7 +49,7 @@ def drink():
 
 @app.route("/order/")
 def order():
-    return render_template('order.html')
+    return render_template('order.html',order = order1)
 
 @app.route("/track/")
 def track():
@@ -78,7 +78,7 @@ def getSides():
     order1.set_sides(side1)
     if(side1._sides == []):
         return "No Side Purchases"
-    return order1.printTotal
+    return redirect(url_for('order'))
 
 @app.route("/drinks/", methods = ['POST','GET'])
 def getDrinks():
@@ -102,7 +102,7 @@ def getDrinks():
     order1.set_drinks(drink1)
     if(drink1._drinks == []):
         return "<h1>You made no Side Orders</h1>"
-    return order1.printTotal
+    return redirect(url_for('order'))
 
 @app.route("/create-your-own/burger/", methods = ['POST','GET'])
 def make_burger():
@@ -127,7 +127,7 @@ def make_burger():
         global order1
         order1.set_mains(meal1)
     #    print(burge1.getIngredients)
-    return order1.printTotal
+    return redirect(url_for('order'))
 
 @app.route("/create-your-own/wrap/", methods = ['POST','GET'])
 def make_wrap():
@@ -152,7 +152,7 @@ def make_wrap():
         global order1
         order1.set_mains(meal1)
     #    print(burge1.getIngredients)
-    return order1.printTotal
+    return redirect(url_for('order'))
 
 if __name__ == '__main__':
     app.run(debug=True)

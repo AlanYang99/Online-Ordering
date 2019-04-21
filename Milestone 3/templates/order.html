@@ -15,3 +15,47 @@
     </style>
 
 {% endblock %}
+{% block content %}
+<br>
+<h1 align = center> Pay for Order</h1>
+
+<table align = "center" id = "ord">
+    <tr>
+        <th>Items</th>
+        <th>Ingredients (for mains)</th>
+        <th>Price</th>
+    </tr>
+    {% if(order._mains != None) %}
+        {% for burger in order._mains._burgers %}
+        <tr>
+            <th>{{burger._amount}}x Burger</th>
+            <th>{{burger.getIngredients}}</th>
+            <th>${{burger.price}}</th>
+        </tr>
+        {% endfor %}
+        {% for wrap in order._mains._wraps %}
+        <tr>
+            <th>{{wrap._amount}}x Wrap</th>
+            <th>{{wrap.getIngredients}}</th>
+            <th>${{wrap.price}}</th>
+        </tr>
+        {% endfor %}
+    {% endif %}
+    {% if(order._sides != None) %}
+        {% for side in order._sides._sides %}
+        <tr>
+            <th>{{side._amount}}x {{side._name}}</th>
+            <th colspan = "2">${{(side._amount * side._price)}}</th>
+        </tr>
+        {% endfor %}
+    {% endif %}
+    {% if(order._drinks != None) %}
+        {% for drink in order._drinks._drinks %}
+        <tr>
+            <th>{{drink._amount}}x {{drink._name}}</th>
+            <th colspan = "2">${{(drink._amount * drink._price)}}</th>
+        </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+{% endblock %}

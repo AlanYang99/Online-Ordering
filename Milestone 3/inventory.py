@@ -10,7 +10,7 @@ class Food:
         self._amount = amount
 
     def __str__(self):
-        return f"{self._amount}x {self._name} : ${round(self._amount * self._price,2)}<br>"
+        return f"{self._amount}x {self._name} : ${round(self._amount * self._price,2)}\n"
         # output = f"{self._amount}x {self._name} : ${self._amount * self._price}\n"
 
     # def __repr__(self):
