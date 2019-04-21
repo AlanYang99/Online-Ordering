@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Order Drinks {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        li a:hover:not(.Drink) {
+          background-color: #ddd;
+        }
+
+        li a.Drink {
+          color: white;
+          background-color: #DC143C;
+        }
+
+
+
+    </style>
+
+{% endblock %}
+{% block content %}
+<br>
+<h1 align = center> Order Drinks </h1>
+<form id = "amount" method = "POST" align = "center">
+<table align = "center" id = "ord">
+    <tr>
+        <th>Drinks</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+
+    {% for drink in drink_list %}
+        <tr>
+            <td>{{ drink._name }}</td>
+            <td>{{ drink._price }}</td>
+            <td><input type="number" name= "{{ drink._name }}" value = "0"
+            min="0" max="15"> </td>
+        </tr>
+    {% endfor %}
+
+</table>
+<br>
+<input type = "submit" class = "button" value = "Add to Order">
+</form>
+{% endblock %}
