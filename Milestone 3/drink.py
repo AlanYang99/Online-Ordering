@@ -14,7 +14,7 @@ class drinks():
         if(haveItem(self._drinks,drink)):
             for i in self._drinks:
                 if (drink == i._name):
-                    i._amount += i._amount
+                    i._amount += amount
                     break
         else:
             for i in drinks:
