@@ -14,20 +14,23 @@ class Order:
     @property
     def totalCost(self):
         price = 0
-        price += self._mains.price
-        price += self._sides.price
-        price += self._drinks.price
+        if self._mains is not None:
+            price += self._mains.price
+        if self._sides is not None:
+            price += self._sides.price
+        if self._drinks is not None:
+            price += self._drinks.price
         return price
 
-    @property
+    #@property
     def printTotal(self):
         output = ''
         if(self._mains != None):
             output += self._mains.displayMains
         if(self._drinks != None):
-            output += self._drinks.get_drinks
+            output += self._drinks.get_drinks()
         if(self._sides != None):
-            output += self._sides.get_sides
+            output += self._sides.get_sides()
         if(output == ''):
             return "No Orders Currently Made"
         return output

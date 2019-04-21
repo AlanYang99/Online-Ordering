@@ -105,18 +105,19 @@ class burgerIngredients:
         burgerIngredients = pickle.load(infile)
         infile.close()
         for i in burgerIngredients:
-            if(i._name == burgerIngredient):
+            if (i._name == burgerIngredient):
                 self._burgerIngredients.append(Food(i._name, i._price, amount))
                 found = 1
                 break
         if(found == 0):
-            print("Ingredient is not found")
+            print(burgerIngredient, "is not found")
 
     @property
     def get_burgerIngredients(self):
         burger_ingredient_list = ' '
         for ingredient in self._burgerIngredients:
             burger_ingredient_list += "   " + str(ingredient)
+            print(str(ingredient))
         return burger_ingredient_list
 
     @property
