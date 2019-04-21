@@ -5,6 +5,7 @@ from inventory import get_inventory
 from side import sides
 from drink import drinks
 from order import Order
+from system import OrderSystem
 from main import *
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ side1 = sides()
 drink1 = drinks()
 meal1 = meals()
 order1 = Order()
+sys = OrderSystem()
 
 
 @app.route("/")
@@ -56,6 +58,33 @@ def order():
 def track():
     return render_template('track.html')
 
+@app.route("/order/purchased/")
+def purchased():
+    return render_template('Purchased_Order.html')
+
+
+
+#Thanks to lab08
+@app.route('/404/')
+@app.errorhandler(404)
+def page_not_found(e=None):
+    return render_template('404.html'), 404
+
+#Thanks to lab08
+@app.route("/staff/")
+def staff():
+    return render_template('staff.html',order_list = sys._orders)
+
+#Thanks to lab08
+@app.route("/staff/<id>",methods = ['POST','GET'])
+def access_orders(id):
+    print(id)
+    order = sys.get_order(id)
+
+    if (order == None):
+        return redirect(url_for('page_not_found'))
+
+    return render_template('Order_details.html',order = order)
 
 #when making the order ensure self._sides, self._drinks are all reseted
 @app.route("/sides/", methods = ['POST','GET'])
@@ -89,7 +118,6 @@ def getDrinks():
         for state, capital in quantity_list.items():
             if(not(capital.isdigit()) or int(capital) == 0):
                 continue
-            print(int(capital))
             drink1.set_drinks(state,int(capital))
 
         # print(type(order1))
@@ -114,7 +142,6 @@ def make_burger():
         i = 0
         for state, capital in quantity_list.items():
             i+=1
-            print(i)
             if(not(capital.isdigit()) or int(capital) == 0):
                 continue
             if(i >= 6):
@@ -139,7 +166,6 @@ def make_wrap():
         i = 0
         for state, capital in quantity_list.items():
             i+=1
-            print(i)
             if(not(capital.isdigit()) or int(capital) == 0):
                 continue
             if(i >= 6):
@@ -154,6 +180,16 @@ def make_wrap():
         order1.set_mains(meal1)
     #    print(burge1.getIngredients)
     return redirect(url_for('order'))
+
+@app.route("/order/",methods = ['POST','GET'])
+def make_order():
+    global order1
+    sys.make_booking(order1)
+    order1 = Order()
+    side1 = sides()
+    drink1 = drinks()
+    meal1 = meals()
+    return redirect(url_for('purchased'))
 
 if __name__ == '__main__':
     app.run(debug=True)
