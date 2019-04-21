@@ -20,6 +20,21 @@ Home Page
 def home():
     return render_template('home.html')
 
+@app.route("/create-your-own/")
+def new_main():
+    return render_template('creation.html')
+
+@app.route("/create-your-own/burger/")
+def new_burger():
+    return render_template('burger.html',ingredient_list = get_inventory('ingredients'),
+                            ingredient_list2 = get_inventory('ingredients1'),
+                            ingredient_list3 = get_inventory('burgerIngredients'))
+
+@app.route("/create-your-own/wrap/")
+def new_wrap():
+    return render_template('wrap.html',ingredient_list = get_inventory('ingredients'),
+                            ingredient_list2 = get_inventory('ingredients1'),
+                            ingredient_list3 = get_inventory('wrapIngredients'))
 
 @app.route("/mains/")
 def main():
@@ -78,6 +93,7 @@ def order():
 def track():
     return render_template('track.html')
 
+
 #when making the order ensure self._sides, self._drinks are all reseted
 @app.route("/sides/", methods = ['POST','GET'])
 def getSides():
@@ -124,6 +140,22 @@ def getDrinks():
         return "<h1>You made no Side Orders</h1>"
     return Order(None,side1,drink1).printTotal
 
+@app.route("/create-your-own/burger/", methods = ['POST','GET'])
+def make_burger():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        print(quantity_list)
+    return "Hello"
+
+@app.route("/create-your-own/wrap/", methods = ['POST','GET'])
+def make_wrap():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        print(quantity_list)
+    return "Hello"
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 if __name__ == '__main__':
