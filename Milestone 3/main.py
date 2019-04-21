@@ -1,6 +1,6 @@
 from abc import ABC
-from src.inventory import Food
-import dill as pickle
+from inventory import Food
+import pickle
 
 # class Food:
 #     '''
@@ -47,7 +47,7 @@ class Ingredients():
             print("Ingredient is not found")
 
     @property
-    def get_ingredients(self):
+    def getIngredients(self):
         ingredient_list = ' '
         for ingredient in self._ingredients:
             ingredient_list += "   " + str(ingredient)
@@ -62,12 +62,12 @@ class Ingredients():
 
 #Could just name wrapIngredients and burgeringredients as ingredients and just
 #inherit from Ingredients
-class WrapIngredients:
+class wrapIngredients:
 
     def __init__(self):
         self._wrapIngredients = []
 
-    def set_wrap_ingredients(self,wrapIngredient,amount):
+    def set_wrapIngredients(self,wrapIngredient,amount):
         found = 0
         infile = open("wrapIngredients", "rb")
         wrapIngredients = pickle.load(infile)
@@ -81,7 +81,7 @@ class WrapIngredients:
             print("Ingredient is not found")
 
     @property
-    def get_wrap_ingredients(self):
+    def get_wrapIngredients(self):
         wrap_ingredient_list = ' '
         for ingredient in self._wrapIngredients:
             wrap_ingredient_list += "   " + str(ingredient)
@@ -94,12 +94,12 @@ class WrapIngredients:
             cost += (ingredient._amount * ingredient._price)
         return cost
 
-class BurgerIngredients:
+class burgerIngredients:
 
     def __init__(self):
         self._burgerIngredients = []
 
-    def set_burger_ingredients(self,burgerIngredient,amount):
+    def set_burgerIngredients(self,burgerIngredient,amount):
         found = 0
         infile = open("burgerIngredients", "rb")
         burgerIngredients = pickle.load(infile)
@@ -113,7 +113,7 @@ class BurgerIngredients:
             print("Ingredient is not found")
 
     @property
-    def get_burger_ingredients(self):
+    def get_burgerIngredients(self):
         burger_ingredient_list = ' '
         for ingredient in self._burgerIngredients:
             burger_ingredient_list += "   " + str(ingredient)
@@ -126,12 +126,12 @@ class BurgerIngredients:
             cost += (ingredient._amount * ingredient._price)
         return cost
 
-class Mains(ABC):
+class mains(ABC):
 
     def __init__(self,ingredient):
         self._ingredients = ingredient
 
-class Burgers(Mains):
+class burgers(mains):
 
     def __init__(self,ingredients = None,burgerIngredients = None):
         super().__init__(ingredients)
@@ -145,13 +145,13 @@ class Burgers(Mains):
         return round(price,2)
 
     @property
-    def get_ingredients(self):
+    def getIngredients(self):
         output = ''
         output += self._ingredients.getIngredients
         output += self._burgerIngredients.get_burgerIngredients
         return output
 
-class Wraps(Mains):
+class wraps(mains):
 
     def __init__(self,ingredients = None,wrapIngredients = None):
         super().__init__(ingredients)
@@ -165,26 +165,26 @@ class Wraps(Mains):
         return round(price,2)
 
     @property
-    def get_ingredients(self):
+    def getIngredients(self):
         output = ''
         output += self._ingredients.getIngredients
         output += self._wrapIngredients.get_wrapIngredients
         return output
 
-class Meals:
+class meals:
 
     def __init__(self):
         self._burgers = []
         self._wraps = []
 
-    def add_burger(self,burger):
+    def addBurger(self,burger):
         self._burgers.append(burger)
 
-    def add_wrap(self,wrap):
+    def addWrap(self,wrap):
         self._wraps.append(wrap)
 
     @property
-    def display_mains(self):
+    def displayMains(self):
         output = ''
         for i in self._burgers:
             output+= 'Plain burger:\n'
