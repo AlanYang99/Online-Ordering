@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #!/usr/bin/env python3
 from flask import Flask, render_template, url_for, request,redirect
 from werkzeug.datastructures import ImmutableMultiDict
@@ -21,6 +20,7 @@ Home Page
 def home():
     return render_template('home.html')
 
+
 @app.route("/mains/")
 def main():
     return render_template('main.html')
@@ -40,7 +40,7 @@ def order_sides():
     print(available_sides)
 
     if request.method == "POST":
-        for item in available_sides: 
+        for item in available_sides:
             num_side = request.form.get(item)
             if num_side is not '' and num_side is not '0':
                 print(item,num_side)
@@ -62,7 +62,7 @@ def order_drinks():
     available_drinks = Inventory.get_drinks()
 
     if request.method == "POST":
-        for item in available_drinks: 
+        for item in available_drinks:
             num_drink = request.form.get(item)
             if num_drink is not '' and num_drink is not '0':
                 ordered_drinks.set_drinks(item,num_drink)
@@ -77,6 +77,54 @@ def order():
 @app.route("/track/")
 def track():
     return render_template('track.html')
+
+#when making the order ensure self._sides, self._drinks are all reseted
+@app.route("/sides/", methods = ['POST','GET'])
+def getSides():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        global side1
+        for state, capital in quantity_list.items():
+            if(not(capital.isdigit()) or int(capital) == 0):
+                continue
+            side1.set_sides(state,int(capital))
+
+        # print(type(order1))
+        #quantity_list = f.getlist('quantity')
+        #So quantity_list is now  a list of values corresponding to the users
+        #Ordered quantities of items.
+        #In sides, for special products like fries (which comes in varying) sizes
+        #do a if statement, if get_inventory , item is = fries, and decrement for large, medium small subsequently
+
+    global order1
+    if(side1._sides == []):
+        return "No Side Purchases"
+    return Order(None,side1,drink1).printTotal
+
+@app.route("/drinks/", methods = ['POST','GET'])
+def getDrinks():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        global drink1
+        for state, capital in quantity_list.items():
+            if(not(capital.isdigit()) or int(capital) == 0):
+                continue
+            drink1.set_drinks(state,int(capital))
+
+        # print(type(order1))
+        #quantity_list = f.getlist('quantity')
+        #So quantity_list is now  a list of values corresponding to the users
+        #Ordered quantities of items.
+        #In sides, for special products like fries (which comes in varying) sizes
+        #do a if statement, if get_inventory , item is = fries, and decrement for large, medium small subsequently
+
+    global order1
+
+    if(drink1._drinks == []):
+        return "<h1>You made no Side Orders</h1>"
+    return Order(None,side1,drink1).printTotal
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
