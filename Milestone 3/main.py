@@ -38,11 +38,18 @@ class Ingredients():
         infile = open("Ingredients", "rb")
         ingredients = pickle.load(infile)
         infile.close()
+        infile = open("Ingredients1", "rb")
+        ingredients1 = pickle.load(infile)
+        infile.close()
         for i in ingredients:
             if(i._name == ingredient):
                 self._ingredients.append(Food(ingredient, i._price, amount))
                 found = 1
-                break
+
+        for i in ingredients1:
+            if(i._name == ingredient):
+                self._ingredients.append(Food(ingredient, i._price, amount))
+                found = 1
         if(found == 0):
             print("Ingredient is not found")
 
@@ -62,7 +69,7 @@ class Ingredients():
 
 #Could just name wrapIngredients and burgeringredients as ingredients and just
 #inherit from Ingredients
-class wrapIngredients:
+class wrapIngredients():
 
     def __init__(self):
         self._wrapIngredients = []
@@ -94,7 +101,7 @@ class wrapIngredients:
             cost += (ingredient._amount * ingredient._price)
         return cost
 
-class burgerIngredients:
+class burgerIngredients():
 
     def __init__(self):
         self._burgerIngredients = []

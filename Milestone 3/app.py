@@ -5,6 +5,7 @@ from inventory import get_inventory
 from side import sides
 from drink import drinks
 from order import Order
+from main import *
 
 app = Flask(__name__)
 
@@ -104,7 +105,21 @@ def getDrinks():
 def make_burger():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
-        print(quantity_list)
+        burg1 = burgerIngredients()
+        ingr1 = Ingredients()
+        i = 0
+        for state, capital in quantity_list.items():
+            i+=1
+            print(i)
+            if(not(capital.isdigit()) or int(capital) == 0):
+                continue
+            if(i >= 6):
+                ingr1.set_ingredients(state,int(capital))
+            else:
+                burg1.set_burgerIngredients(state,int(capital))
+        print(ingr1.getIngredients)
+        print(burg1.get_burgerIngredients)
+
     return "Hello"
 
 @app.route("/create-your-own/wrap/", methods = ['POST','GET'])
