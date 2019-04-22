@@ -144,7 +144,7 @@ def increment_wraps_ingredients(name,amount):
     inventory = pickle.load(infile)
     infile.close()
     for i in inventory:
-        if(i._name is name):
+        if(i._name == name):
             i._amount += amount
     outfile = open("wrapIngredients","wb")
     pickle.dump(inventory,outfile)
@@ -155,7 +155,7 @@ def increment_burger_ingredients(name,amount):
     inventory = pickle.load(infile)
     infile.close()
     for i in inventory:
-        if(i._name is name):
+        if(i._name == name):
             i._amount += amount
     outfile = open("burgerIngredients","wb")
     pickle.dump(inventory,outfile)
@@ -166,7 +166,7 @@ def increment_sides(name,amount):
     inventory = pickle.load(infile)
     infile.close()
     for i in inventory:
-        if(i._name is name):
+        if(i._name == name):
             i._amount += amount
     outfile = open("sides","wb")
     pickle.dump(inventory,outfile)
@@ -177,7 +177,7 @@ def increment_drinks(name,amount):
     inventory = pickle.load(infile)
     infile.close()
     for i in inventory:
-        if(i._name is name):
+        if(i._name == name):
             i._amount += amount
     outfile = open("drinks","wb")
     pickle.dump(inventory,outfile)
