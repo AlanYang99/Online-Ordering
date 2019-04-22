@@ -21,6 +21,7 @@ side1 = sides()
 drink1 = drinks()
 meal1 = meals()
 order1 = Order()
+id1 = 0
 
 
 
@@ -64,31 +65,52 @@ def order():
 def track():
     return render_template('track.html')
 
-@app.route("/order/purchased/")
-def purchased():
-    return render_template('Purchased_Order.html')
+
 
 @app.route("/order/main-inventory/")
 def main_inventory():
     return render_template('main_inventory.html',inventory1 = get_inventory("Ingredients"),
                                                 inventory2 = get_inventory("Ingredients1"))
 
-@app.route("/order/burger-inventory/")
+@app.route("/staff/burger-inventory/")
 def burger_inventory():
     return render_template('burger_inventory.html',inventory = get_inventory("burgerIngredients"))
 
-@app.route("/order/wrap-inventory/")
+@app.route("/staff/wrap-inventory/")
 def wrap_inventory():
     return render_template('wrap_inventory.html',inventory = get_inventory("wrapIngredients"))
 
-@app.route("/order/side-inventory/")
+@app.route("/staff/side-inventory/")
 def side_inventory():
     return render_template('side_inventory.html',inventory = get_inventory("sides"))
 
-@app.route("/order/drink-inventory/")
+@app.route("/staff/drink-inventory/")
 def drink_inventory():
     return render_template('drink_inventory.html',inventory = get_inventory("drinks"))
 
+@app.route("/track/")
+def track_order():
+    return render_template('track.html')
+
+@app.route("/track/<id>")
+def id_track(id):
+    order = sys.get_order(id)
+    if(order == None):
+         return redirect(url_for('page_not_found'))
+    else:
+        return render_template('Order_details1.html',order = order)
+
+@app.route("/track/",methods = ['POST','GET'])
+def get_id():
+    if request.method == 'POST':
+        id = request.form['id']
+        # print(id)
+        order = sys.get_order(id)
+
+        if(order == None):
+            return redirect(url_for('page_not_found'))
+        else:
+            return redirect(url_for('id_track',id = id))
 # @app.route("/order/burger-inventory/")
 # def purchased():
 #     return render_template('Purchased_Order.html')
@@ -225,12 +247,19 @@ def make_wrap():
     #    print(burge1.getIngredients)
     return redirect(url_for('order'))
 
+@app.route("/order/purchased/")
+def purchased():
+    global id1
+    return render_template('Purchased_Order.html',id = id1)
+
 @app.route("/order/",methods = ['POST','GET'])
 def make_order():
+    global id1
     global side1
     global order1
     global drink1
     global meal1
+    
     sys.make_booking(order1)
 
     #decreasing burgers
@@ -269,6 +298,7 @@ def make_order():
         amount = drink._amount
         decrement_stock("drinks", name, amount)
 
+    id1 = order._id
     order1 = Order()
     order1._sides = None
     order1._drinks = None
@@ -280,7 +310,6 @@ def make_order():
     drink1._drinks = []
     meal1._burgers = []
     meal1._wraps = []
-
     return redirect(url_for('purchased'))
 
 @app.route("/order/main-inventory/",methods = ['POST','GET'])
