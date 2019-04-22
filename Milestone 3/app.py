@@ -63,6 +63,19 @@ def track():
 def purchased():
     return render_template('Purchased_Order.html')
 
+@app.route("/order/main-inventory/")
+def main_inventory():
+    return render_template('main_inventory.html',inventory1 = get_inventory("Ingredients"),
+                                                inventory2 = get_inventory("Ingredients1"))
+
+# @app.route("/order/burger-inventory/")
+# def purchased():
+#     return render_template('Purchased_Order.html')
+#
+# @app.route("/order/wrap-inventory/")
+# def purchased():
+#     return render_template('Purchased_Order.html')
+
 
 
 #Thanks to lab08
@@ -211,6 +224,10 @@ def make_order():
     meal1._wraps = []
 
     return redirect(url_for('purchased'))
+
+@app.route("/order/main-inventory/",methods = ['POST','GET'])
+def increment_main_inventory():
+
 
 if __name__ == '__main__':
     app.run(debug=True)
