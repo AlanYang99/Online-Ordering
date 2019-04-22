@@ -232,7 +232,30 @@ def make_order():
     global drink1
     global meal1
     sys.make_booking(order1)
-    
+
+    #decreasing burgers
+    for burger in meal1._burgers:
+        for ingredient in burger._ingredients._ingredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(burger._amount)
+            decrement_stock("Ingredients", name, amount)
+            decrement_stock("Ingredients1", name, amount)
+        for ingredient in burger._burgerIngredients._burgerIngredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(burger._amount)
+            decrement_stock("burgerIngredients", name, amount)
+
+    #decreasing wraps
+    for wrap in meal1._wraps:
+        for ingredient in wrap._ingredients._ingredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(wrap._amount)
+            decrement_stock("Ingredients", name, amount)
+            decrement_stock("Ingredients1", name, amount)
+        for ingredient in wrap._wrapIngredients._wrapIngredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(burger._amount)
+            decrement_stock("wrapIngredients", name, amount)
 
     #decreasing sides
     for side in side1._sides:
