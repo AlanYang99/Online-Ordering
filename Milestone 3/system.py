@@ -19,7 +19,7 @@ class OrderSystem:
     def __init__(self):
         self._orders = []  #for now, make a pickle file for orderlist
 
-    def make_booking(self,order):
+    def make_order(self,order):
         new_order = OrderId(order)
         self._orders.append(new_order)
         return new_order
