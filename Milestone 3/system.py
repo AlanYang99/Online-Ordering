@@ -22,7 +22,7 @@ class OrderSystem:
     def make_booking(self,order):
         new_order = OrderId(order)
         self._orders.append(new_order)
-
+        return new_order
 
     def get_order(self,id):
         for order in self._orders:
