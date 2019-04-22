@@ -8,6 +8,8 @@ from order import Order
 from system import OrderSystem
 from system import sys
 from system import increment_ingredients, increment_ingredients1
+from system import increment_wraps_ingredients, increment_burger_ingredients
+from system import increment_sides, increment_drinks
 from main import *
 
 app = Flask(__name__)
@@ -68,6 +70,22 @@ def purchased():
 def main_inventory():
     return render_template('main_inventory.html',inventory1 = get_inventory("Ingredients"),
                                                 inventory2 = get_inventory("Ingredients1"))
+
+@app.route("/order/burger-inventory/")
+def burger_inventory():
+    return render_template('burger_inventory.html',inventory = get_inventory("burgerIngredients"))
+
+@app.route("/order/wrap-inventory/")
+def wrap_inventory():
+    return render_template('wrap_inventory.html',inventory = get_inventory("wrapIngredients"))
+
+@app.route("/order/side-inventory/")
+def side_inventory():
+    return render_template('side_inventory.html',inventory = get_inventory("sides"))
+
+@app.route("/order/drink-inventory/")
+def drink_inventory():
+    return render_template('drink_inventory.html',inventory = get_inventory("drinks"))
 
 # @app.route("/order/burger-inventory/")
 # def purchased():
@@ -242,6 +260,51 @@ def increment_main_inventory():
 
 
     return redirect(url_for('main_inventory'))
+
+@app.route("/order/burger-inventory/",methods = ['POST','GET'])
+def increment_burger_inventory():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        for state, capital in quantity_list.items():
+            if(not(capital.isdigit())):
+                continue
+            increment_burger_ingredients(state,int(capital))
+
+    return redirect(url_for('burger_inventory'))
+
+@app.route("/order/wrap-inventory/",methods = ['POST','GET'])
+def increment_wrap_inventory():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        for state, capital in quantity_list.items():
+            if(not(capital.isdigit())):
+                continue
+            increment_wraps_ingredients(state,int(capital))
+
+    return redirect(url_for('wrap_inventory'))
+
+@app.route("/order/side-inventory/",methods = ['POST','GET'])
+def increment_side_inventory():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        for state, capital in quantity_list.items():
+            if(not(capital.isdigit())):
+                continue
+            increment_sides(state,int(capital))
+
+    return redirect(url_for('side_inventory'))
+
+@app.route("/order/drink-inventory/",methods = ['POST','GET'])
+def increment_drink_inventory():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        for state, capital in quantity_list.items():
+            if(not(capital.isdigit())):
+                continue
+            increment_drinks(state,int(capital))
+
+
+    return redirect(url_for('drink_inventory'))
 
 
 

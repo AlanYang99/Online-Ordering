@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Design1.css') }}">
+    <style type="text/css">
+        li a:hover:not(.main_inventory) {
+          background-color: #ddd;
+        }
+
+        li a.main_inventory {
+          color: white;
+          background-color: #DC143C;
+        }
+
+        #ord {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width : 55%
+        }
+
+        #ord td, #ord th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align : center;
+        }
+
+        #ord th {
+            text-align : center;
+            background-color : #33ccff;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        #ord input {
+            width: 75%;
+        }
+        #ord tr:nth-child(even){background-color: #f2f2f2;}
+        #ord tr:hover {background-color: #ddd;}
+
+    </style>
+    <title>Asian Mcdonalds</title>
+</head>
+<body>
+    <h1 align = "center"> Asian Mcdonalds</h1>
+    <header>
+        <ul>
+          <li><a class = "Staff" href="{{ url_for('staff')}}">Staff Home</a></li>
+          <li><a class = "main_inventory" href="{{ url_for('main_inventory')}}">Staff Home</a></li>
+        </ul>
+    </header>
+    <br>
+    <h1 align = center> Drink Inventory </h1>
+    <form id = "amount" method = "POST" align = "center">
+        <table align = "center" id = "ord">
+            <tr>
+                <th>Ingredient</th>
+                <th>Quantity</th>
+                <th>To Increment</th>
+            </tr>
+
+            {% for ingredient in inventory %}
+                <tr>
+                    <td>{{ ingredient._name }}</td>
+                    <td>{{ ingredient._amount }}</td>
+                    <td><input type="number" name= "{{ ingredient._name }}" value = "0"
+                    min="0" max="1000"> </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <input type = "submit" class = "button" value = "Increase Inventory">
+        </form>
