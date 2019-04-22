@@ -5,6 +5,9 @@ from inventory import get_inventory
 from side import sides
 from drink import drinks
 from order import Order
+from system import OrderSystem
+from system import sys
+from system import increment_ingredients, increment_ingredients1
 from main import *
 
 app = Flask(__name__)
@@ -14,6 +17,7 @@ side1 = sides()
 drink1 = drinks()
 meal1 = meals()
 order1 = Order()
+
 
 
 @app.route("/")
@@ -56,6 +60,55 @@ def order():
 def track():
     return render_template('track.html')
 
+@app.route("/order/purchased/")
+def purchased():
+    return render_template('Purchased_Order.html')
+
+@app.route("/order/main-inventory/")
+def main_inventory():
+    return render_template('main_inventory.html',inventory1 = get_inventory("Ingredients"),
+                                                inventory2 = get_inventory("Ingredients1"))
+
+# @app.route("/order/burger-inventory/")
+# def purchased():
+#     return render_template('Purchased_Order.html')
+#
+# @app.route("/order/wrap-inventory/")
+# def purchased():
+#     return render_template('Purchased_Order.html')
+
+
+
+#Thanks to lab08
+@app.route('/404/')
+@app.errorhandler(404)
+def page_not_found(e=None):
+    return render_template('404.html'), 404
+
+#Thanks to lab08
+@app.route("/staff/")
+def staff():
+    return render_template('staff.html',order_list = sys._orders)
+
+#Thanks to lab08
+@app.route("/staff/<id>/")
+def access_orders(id):
+
+    order = sys.get_order(id)
+
+    if (order == None):
+        return redirect(url_for('page_not_found'))
+
+    return render_template('Order_details.html',order = order)
+
+@app.route("/staff/<id>/",methods = ['POST','GET'])
+def update_orders(id):
+    if "update" in request.form:
+        sys.update_status(id)
+        return redirect(url_for('access_orders',id = id))
+    elif "delete" in request.form:
+        sys.delete_order(id)
+        return redirect(url_for('staff'))
 
 #when making the order ensure self._sides, self._drinks are all reseted
 @app.route("/sides/", methods = ['POST','GET'])
@@ -89,7 +142,6 @@ def getDrinks():
         for state, capital in quantity_list.items():
             if(not(capital.isdigit()) or int(capital) == 0):
                 continue
-            print(int(capital))
             drink1.set_drinks(state,int(capital))
 
         # print(type(order1))
@@ -114,7 +166,6 @@ def make_burger():
         i = 0
         for state, capital in quantity_list.items():
             i+=1
-            print(i)
             if(not(capital.isdigit()) or int(capital) == 0):
                 continue
             if(i >= 6):
@@ -139,7 +190,6 @@ def make_wrap():
         i = 0
         for state, capital in quantity_list.items():
             i+=1
-            print(i)
             if(not(capital.isdigit()) or int(capital) == 0):
                 continue
             if(i >= 6):
@@ -154,6 +204,46 @@ def make_wrap():
         order1.set_mains(meal1)
     #    print(burge1.getIngredients)
     return redirect(url_for('order'))
+
+@app.route("/order/",methods = ['POST','GET'])
+def make_order():
+    global side1
+    global order1
+    global drink1
+    global meal1
+    sys.make_booking(order1)
+    order1 = Order()
+    order1._sides = None
+    order1._drinks = None
+    order1._mains = None
+    side1 = sides()
+    drink1 = drinks()
+    meal1 = meals()
+    side1._sides = []
+    drink1._drinks = []
+    meal1._burgers = []
+    meal1._wraps = []
+
+    return redirect(url_for('purchased'))
+
+@app.route("/order/main-inventory/",methods = ['POST','GET'])
+def increment_main_inventory():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        i = 0
+        for state, capital in quantity_list.items():
+            i+=1
+            if(not(capital.isdigit())):
+                continue
+            if(i >= 8):
+                increment_ingredients1(state,int(capital))
+            else:
+                increment_ingredients(state,int(capital))
+
+
+    return redirect(url_for('main_inventory'))
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
