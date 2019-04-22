@@ -149,10 +149,13 @@ class burgers(mains):
     @property
     def price(self):
         price = 0
+        print(price)
         if(self._ingredients != None):
             price += self._ingredients.price
+            print(price)
         if(self._burgerIngredients != None):
             price += self._burgerIngredients.price
+            print(price)
         price*= int(self._amount)
         return (round(price,2))
 
@@ -191,15 +194,38 @@ class wraps(mains):
 
 class meals:
 
+    ingr1 = Ingredients()
+    ingr1.set_ingredients('Tomato Slices',2)
+    ingr1.set_ingredients('Cheddar Cheese',1)
+    ingr1.set_ingredients('Lettuce',2)
+    ingr1.set_ingredients('Hot Sauce',1)
+
+    burg1 = burgerIngredients()
+    burg1.set_burgerIngredients('Sesame Seed Bun',2)
+    burg1.set_burgerIngredients('Beef Patty',2)
+
+    wrap1 = wrapIngredients()
+    wrap1.set_wrapIngredients('Lavash',2)
     def __init__(self):
         self._burgers = []
         self._wraps = []
+        self._Luger_Burger = burgers(meals.ingr1,meals.burg1,1)
+        self._Luger_Wrap = wraps(meals.ingr1,meals.wrap1,1)
+
 
     def addBurger(self,burger):
         self._burgers.append(burger)
 
     def addWrap(self,wrap):
         self._wraps.append(wrap)
+
+    def add_Luger_Burger(self,amount):
+        toAdd = burgers(meals.ingr1,meals.burg1,amount)
+        self._burgers.append(toAdd)
+
+    def add_Luger_Wrap(self,amount):
+        toAdd = wraps(meals.ingr1,meals.wrap1,amount)
+        self._wraps.append(toAdd)
 
     @property
     def displayMains(self):

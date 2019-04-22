@@ -119,7 +119,6 @@ def increment_ingredients(name,amount):
     infile = open("Ingredients",'rb')
     inventory = pickle.load(infile)
     infile.close()
-    print(len(inventory))
     for i in inventory:
         if(i._name == name):
             i._amount += amount
@@ -182,6 +181,20 @@ def increment_drinks(name,amount):
     outfile = open("drinks","wb")
     pickle.dump(inventory,outfile)
     outfile.close()
+
+def decrement_stock(inventory_type,name,amount):
+    infile = open(inventory_type,'rb')
+    inventory = pickle.load(infile)
+    infile.close()
+    for i in inventory:
+        if str(i._name) == str(name):
+            print(i._name)
+            print(i._amount)
+            i._amount -= amount
+            print(i._amount)
+    outfile = open(inventory_type,"wb")
+    pickle.dump(inventory,outfile)
+    outfile.close()    
 # add_ingredients("Lettuce",0.3,2000,"Ingredients1")
 # add_ingredients("Diced Tomatoes",0.2,2000,"Ingredients1")
 # add_ingredients("Fried Onions",0.2,2000,"Ingredients1")

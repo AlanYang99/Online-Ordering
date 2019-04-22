@@ -9,7 +9,7 @@ from system import OrderSystem
 from system import sys
 from system import increment_ingredients, increment_ingredients1
 from system import increment_wraps_ingredients, increment_burger_ingredients
-from system import increment_sides, increment_drinks
+from system import increment_sides, increment_drinks,decrement_stock
 from main import *
 
 app = Flask(__name__)
@@ -45,7 +45,25 @@ def new_wrap():
 
 @app.route("/mains/")
 def main():
-    return render_template('main.html')
+    global meal1
+    return render_template('main.html',burger = meal1._Luger_Burger
+                                ,wrap = meal1._Luger_Wrap)
+
+@app.route("/mains/",methods = ['POST','GET'])
+def add_mains():
+    if request.method == 'POST':
+        burger_amount = request.form['burger']
+        wrap_amount = request.form['wrap']
+        global meal1
+        global order1
+        if(burger_amount.isdigit() and int(burger_amount) != 0):
+            meal1.add_Luger_Burger(int(burger_amount))
+        if(wrap_amount.isdigit() and int(wrap_amount) != 0):
+            meal1.add_Luger_Wrap(int(wrap_amount))
+
+        order1.set_mains(meal1)
+        return redirect(url_for('order'))
+
 
 @app.route("/sides/")
 def side():
@@ -65,7 +83,7 @@ def track():
 
 
 
-@app.route("/order/main-inventory/")
+@app.route("/staff/main-inventory/")
 def main_inventory():
     return render_template('main_inventory.html',inventory1 = get_inventory("Ingredients"),
                                                 inventory2 = get_inventory("Ingredients1"))
@@ -257,7 +275,45 @@ def make_order():
     global order1
     global drink1
     global meal1
+
     order = sys.make_booking(order1)
+
+    #decreasing burgers
+    for burger in meal1._burgers:
+        for ingredient in burger._ingredients._ingredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(burger._amount)
+            decrement_stock("Ingredients", name, amount)
+            decrement_stock("Ingredients1", name, amount)
+        for ingredient in burger._burgerIngredients._burgerIngredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(burger._amount)
+            decrement_stock("burgerIngredients", name, amount)
+
+    #decreasing wraps
+    for wrap in meal1._wraps:
+        for ingredient in wrap._ingredients._ingredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(wrap._amount)
+            decrement_stock("Ingredients", name, amount)
+            decrement_stock("Ingredients1", name, amount)
+        for ingredient in wrap._wrapIngredients._wrapIngredients:
+            name = ingredient._name
+            amount = int(ingredient._amount) * int(wrap._amount)
+            decrement_stock("wrapIngredients", name, amount)
+
+    #decreasing sides
+    for side in side1._sides:
+        name = side._name
+        amount = side._amount
+        decrement_stock("sides", name, amount)
+
+    #decreasing drinks
+    for drink in drink1._drinks:
+        name = drink._name
+        amount = drink._amount
+        decrement_stock("drinks", name, amount)
+
     id1 = order._id
     order1 = Order()
     order1._sides = None
@@ -272,7 +328,7 @@ def make_order():
     meal1._wraps = []
     return redirect(url_for('purchased'))
 
-@app.route("/order/main-inventory/",methods = ['POST','GET'])
+@app.route("/staff/main-inventory/",methods = ['POST','GET'])
 def increment_main_inventory():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
@@ -286,24 +342,29 @@ def increment_main_inventory():
             else:
                 increment_ingredients(state,int(capital))
 
-
     return redirect(url_for('main_inventory'))
 
-@app.route("/order/burger-inventory/",methods = ['POST','GET'])
+@app.route("/staff/burger-inventory/",methods = ['POST','GET'])
 def increment_burger_inventory():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
+        i = 0
         for state, capital in quantity_list.items():
             if(not(capital.isdigit())):
                 continue
+            if(int(capital) != 0):
+                i = 1
             increment_burger_ingredients(state,int(capital))
 
-    return redirect(url_for('burger_inventory'))
+        return redirect(url_for('burger_inventory'))
 
-@app.route("/order/wrap-inventory/",methods = ['POST','GET'])
+
+
+@app.route("/staff/wrap-inventory/",methods = ['POST','GET'])
 def increment_wrap_inventory():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
+        print(quantity_list)
         for state, capital in quantity_list.items():
             if(not(capital.isdigit())):
                 continue
@@ -311,7 +372,7 @@ def increment_wrap_inventory():
 
     return redirect(url_for('wrap_inventory'))
 
-@app.route("/order/side-inventory/",methods = ['POST','GET'])
+@app.route("/staff/side-inventory/",methods = ['POST','GET'])
 def increment_side_inventory():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
@@ -322,7 +383,7 @@ def increment_side_inventory():
 
     return redirect(url_for('side_inventory'))
 
-@app.route("/order/drink-inventory/",methods = ['POST','GET'])
+@app.route("/staff/drink-inventory/",methods = ['POST','GET'])
 def increment_drink_inventory():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
@@ -333,6 +394,8 @@ def increment_drink_inventory():
 
 
     return redirect(url_for('drink_inventory'))
+
+
 
 
 
