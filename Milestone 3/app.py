@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template, url_for, request,redirect
 from werkzeug.datastructures import ImmutableMultiDict
 
@@ -9,7 +10,12 @@ from system import OrderSystem
 from system import sys
 from system import increment_ingredients, increment_ingredients1
 from system import increment_wraps_ingredients, increment_burger_ingredients
+<<<<<<< HEAD
 from system import increment_sides, increment_drinks,decrement_stock
+=======
+from system import increment_sides, increment_drinks
+from system import decrement_stock
+>>>>>>> 31c3becf0f0fbcd912ecb4e559a4761f1ac82ee8
 from main import *
 
 app = Flask(__name__)
@@ -275,7 +281,7 @@ def make_order():
     global order1
     global drink1
     global meal1
-
+    
     order = sys.make_booking(order1)
 
     #decreasing burgers

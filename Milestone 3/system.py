@@ -194,7 +194,7 @@ def decrement_stock(inventory_type,name,amount):
             print(i._amount)
     outfile = open(inventory_type,"wb")
     pickle.dump(inventory,outfile)
-    outfile.close()    
+    outfile.close()
 # add_ingredients("Lettuce",0.3,2000,"Ingredients1")
 # add_ingredients("Diced Tomatoes",0.2,2000,"Ingredients1")
 # add_ingredients("Fried Onions",0.2,2000,"Ingredients1")
