@@ -3,8 +3,8 @@ from flask import Flask, render_template, url_for, request,redirect
 from werkzeug.datastructures import ImmutableMultiDict
 
 from inventory import get_inventory
-from side import sides
-from drink import drinks
+from side import Sides
+from drink import Drinks
 from order import Order
 from system import OrderSystem
 from system import sys
@@ -16,9 +16,9 @@ from main import *
 app = Flask(__name__)
 app.secret_key = "ed1f3de267e251db"
 
-side1 = sides()
-drink1 = drinks()
-meal1 = meals()
+side1 = Sides()
+drink1 = Drinks()
+meal1 = Meals()
 order1 = Order()
 id1 = 0
 
@@ -218,7 +218,7 @@ def getDrinks():
 def make_burger():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
-        burg1 = burgerIngredients()
+        burg1 = BurgerIngredients()
         ingr1 = Ingredients()
         i = 0
         for state, capital in quantity_list.items():
@@ -228,11 +228,11 @@ def make_burger():
             if(i >= 6):
                 ingr1.set_ingredients(state,int(capital))
             else:
-                burg1.set_burgerIngredients(state,int(capital))
+                burg1.set_burger_ingredients(state,int(capital))
         #print(ingr1.getIngredients)
         #print(burg1.get_burgerIngredients)
         global meal1
-        meal1.addBurger(burgers(ingr1,burg1,quantity_list['quantity']))
+        meal1.add_burger(Burgers(ingr1,burg1,quantity_list['quantity']))
         global order1
         order1.set_mains(meal1)
     #    print(burge1.getIngredients)
@@ -242,7 +242,7 @@ def make_burger():
 def make_wrap():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
-        wrap1 = wrapIngredients()
+        wrap1 = WrapIngredients()
         ingr1 = Ingredients()
         i = 0
         for state, capital in quantity_list.items():
@@ -252,11 +252,11 @@ def make_wrap():
             if(i >= 6):
                 ingr1.set_ingredients(state,int(capital))
             else:
-                wrap1.set_wrapIngredients(state,int(capital))
+                wrap1.set_wrap_ingredients(state,int(capital))
         #print(ingr1.getIngredients)
         #print(burg1.get_burgerIngredients)
         global meal1
-        meal1.addWrap(wraps(ingr1,wrap1,quantity_list['quantity']))
+        meal1.add_wrap(wraps(ingr1,wrap1,quantity_list['quantity']))
         global order1
         order1.set_mains(meal1)
     #    print(burge1.getIngredients)
@@ -296,7 +296,7 @@ def make_order():
             amount = int(ingredient._amount) * int(wrap._amount)
             decrement_stock("Ingredients", name, amount)
             decrement_stock("Ingredients1", name, amount)
-        for ingredient in wrap._wrapIngredients._wrapIngredients:
+        for ingredient in wrap._wrap_ingredients._wrap_ingredients:
             name = ingredient._name
             amount = int(ingredient._amount) * int(wrap._amount)
             decrement_stock("wrapIngredients", name, amount)
@@ -318,9 +318,9 @@ def make_order():
     order1._sides = None
     order1._drinks = None
     order1._mains = None
-    side1 = sides()
-    drink1 = drinks()
-    meal1 = meals()
+    side1 = Sides()
+    drink1 = Drinks()
+    meal1 = Meals()
     side1._sides = []
     drink1._drinks = []
     meal1._burgers = []

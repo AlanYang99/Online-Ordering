@@ -1,8 +1,8 @@
 from inventory import Food
-from Utility import haveItem
+from Utility import have_item
 import pickle
 
-class drinks():
+class Drinks():
 
     def __init__(self):
         self._drinks = []
@@ -11,7 +11,7 @@ class drinks():
         infile = open("drinks", "rb")
         drinks = pickle.load(infile)
         infile.close()
-        if(haveItem(self._drinks,drink)):
+        if(have_item(self._drinks,drink)):
             for i in self._drinks:
                 if (drink == i._name):
                     i._amount += amount

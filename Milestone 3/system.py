@@ -29,19 +29,6 @@ class OrderSystem:
             if(int(order._id) == int(id)):
                 return order
         return None
-        # for order in self._orders:
-        #     if(order._id == int(id)):
-        #         return order
-        # return None
-        # for order in self._orders:
-        #     print("test3")
-        #     print(order._order._sides._sides)
-        #
-        #     if(str(order._id) == str(id)):
-        #         print("test4")
-        #         print(order._order._sides._sides)
-        #         return order
-        # return None
 
     def delete_order(self,id):
         i = 0

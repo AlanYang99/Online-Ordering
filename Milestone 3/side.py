@@ -1,8 +1,8 @@
 from inventory import Food
-from Utility import haveItem
+from Utility import have_item
 import pickle
 
-class sides():
+class Sides():
 
     def __init__(self):
         self._sides = []

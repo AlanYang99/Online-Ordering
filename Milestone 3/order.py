@@ -20,7 +20,7 @@ class Order:
         self._drinks = drinks
 
     @property
-    def totalCost(self):
+    def total_cost(self):
         price = 0
         if(self._mains != None):
             price += self._mains.price
@@ -31,10 +31,10 @@ class Order:
         return round(price,2)
 
     @property
-    def printTotal(self):
+    def print_total(self):
         output = ''
         if(self._mains != None):
-            output += self._mains.displayMains
+            output += self._mains.display_mains
         if(self._drinks != None):
             output += self._drinks.get_drinks
         if(self._sides != None):
