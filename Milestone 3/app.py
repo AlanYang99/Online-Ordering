@@ -7,6 +7,7 @@ from drink import drinks
 from order import Order
 from system import OrderSystem
 from system import sys
+from system import increment_ingredients, increment_ingredients1
 from main import *
 
 app = Flask(__name__)
@@ -227,6 +228,21 @@ def make_order():
 
 @app.route("/order/main-inventory/",methods = ['POST','GET'])
 def increment_main_inventory():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        i = 0
+        for state, capital in quantity_list.items():
+            i+=1
+            if(not(capital.isdigit())):
+                continue
+            if(i >= 8):
+                increment_ingredients1(state,int(capital))
+            else:
+                increment_ingredients(state,int(capital))
+
+
+    return redirect(url_for('main_inventory'))
+
 
 
 if __name__ == '__main__':

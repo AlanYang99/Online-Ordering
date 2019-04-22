@@ -119,10 +119,23 @@ def increment_ingredients(name,amount):
     infile = open("Ingredients",'rb')
     inventory = pickle.load(infile)
     infile.close()
+    print(len(inventory))
     for i in inventory:
-        if(i._name is name):
+        if(i._name == name):
             i._amount += amount
+            print(i._amount)
     outfile = open("Ingredients","wb")
+    pickle.dump(inventory,outfile)
+    outfile.close()
+
+def increment_ingredients1(name,amount):
+    infile = open("Ingredients1",'rb')
+    inventory = pickle.load(infile)
+    infile.close()
+    for i in inventory:
+        if(i._name == name):
+            i._amount += amount
+    outfile = open("Ingredients1","wb")
     pickle.dump(inventory,outfile)
     outfile.close()
 
