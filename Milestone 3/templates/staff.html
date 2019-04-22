@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Design1.css') }}">
+    <style type="text/css">
+        li a:hover:not(.Staff) {
+          background-color: #ddd;
+        }
+
+        li a.Staff {
+          color: white;
+          background-color: #DC143C;
+        }
+
+    </style>
+    <title>Asian Mcdonalds</title>
+</head>
+<body>
+    <h1 align = "center"> Asian Mcdonalds</h1>
+    <header>
+        <ul>
+          <li><a class = "Staff" href="{{ url_for('staff')}}">Staff Home</a></li>
+        </ul>
+    </header>
+    <br><br>
+    <h1 align = "center">Pending Orders</h1>
+
+    {% for order in order_list %}
+    <a href="{{url_for('access_orders', id=order._id)}}">Order Id : {{order._id}}</a></li>
+    <br>
+    {% endfor %}
+
+</body>
+</html>
