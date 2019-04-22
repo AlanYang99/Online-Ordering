@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Design1.css') }}">
+{% extends "inventory_base.html" %}
+{% block title %} Staff Portal {% endblock %}
+{% block head %}
+    {{ super() }}
     <style type="text/css">
         li a:hover:not(.Staff) {
           background-color: #ddd;
@@ -11,41 +11,10 @@
           color: white;
           background-color: #DC143C;
         }
-
-        #ord {
-          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-          border-collapse: collapse;
-          width : 55%
-        }
-
-        #ord td, #ord th {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align : center;
-        }
-
-        #ord th {
-            text-align : center;
-            background-color : #33ccff;
-            padding-top: 12px;
-            padding-bottom: 12px;
-        }
-
-        #ord input {
-            width: 75%;
-        }
-        #ord tr:nth-child(even){background-color: #f2f2f2;}
-        #ord tr:hover {background-color: #ddd;}
     </style>
-    <title>Asian Mcdonalds</title>
-</head>
-<body>
-    <h1 align = "center"> Asian Mcdonalds</h1>
-    <header>
-        <ul>
-          <li><a class = "Staff" href="{{ url_for('staff')}}">Staff Home</a></li>
-        </ul>
-    </header>
+
+{% endblock %}
+{% block content %}
     <br><br>
     <div align = "center">
         <h1>Order Id: {{order._id}}</h1>
@@ -87,7 +56,8 @@
             {% endif %}
         </table>
         <form id = "update" method = "POST">
-            <input type = "submit" name = "update" value = "Update Order">
-            <input type = "submit" name = "delete" value = "Delete Order">
+            <input type = "submit" name = "update" value = "Update Order" class = "button">
+            <input type = "submit" name = "delete" value = "Delete Order" class = "button">
         </form>
     </div>
+{% endblock %}

@@ -14,8 +14,6 @@
 
     </style>
 
-
-
 {% endblock %}
 {% block content %}
 <br>
@@ -49,26 +47,3 @@
 <input type = "submit" class = "button" value = "Add to Order">
 </form>
 {% endblock %}
-
-@app.route("/sides/", methods = ['POST','GET'])
-def getSides():
-    if request.method == 'POST':
-        quantity_list = request.form.to_dict()
-        global side1
-        for state, capital in quantity_list.items():
-            if(not(capital.isdigit()) or int(capital) == 0):
-                continue
-            side1.set_sides(state,int(capital))
-
-        # print(type(order1))
-        #quantity_list = f.getlist('quantity')
-        #So quantity_list is now  a list of values corresponding to the users
-        #Ordered quantities of items.
-        #In sides, for special products like fries (which comes in varying) sizes
-        #do a if statement, if get_inventory , item is = fries, and decrement for large, medium small subsequently
-
-    global order1
-    order1.set_sides(side1)
-    if(side1._sides == []):
-        return "No Side Purchases"
-    return redirect(url_for('order'))
