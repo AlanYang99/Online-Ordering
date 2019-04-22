@@ -400,13 +400,3 @@ def increment_drink_inventory():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-'''
-Questions to ask Ian
-1. Doing the project (Iteration3) solo
-2. About the ingredients, for example sundae is made up of chocolate topping and
-   ice-cream, is it possible if I decrement an inventory object called Chocolate Sundae
-   or do  i need to decrement the ingredients used to make a sundae (ice-cream, topping)
-   Or is it pure up to my choice
-3. About the folders issue
-'''
