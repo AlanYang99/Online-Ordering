@@ -6,6 +6,7 @@ from side import sides
 from drink import drinks
 from order import Order
 from system import OrderSystem
+from system import sys
 from main import *
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ side1 = sides()
 drink1 = drinks()
 meal1 = meals()
 order1 = Order()
-sys = OrderSystem()
+
 
 
 @app.route("/")
@@ -78,6 +79,7 @@ def staff():
 #Thanks to lab08
 @app.route("/staff/<id>/")
 def access_orders(id):
+
     order = sys.get_order(id)
 
     if (order == None):
@@ -191,13 +193,23 @@ def make_wrap():
 
 @app.route("/order/",methods = ['POST','GET'])
 def make_order():
+    global side1
     global order1
+    global drink1
+    global meal1
     sys.make_booking(order1)
     order1 = Order()
+    order1._sides = None
+    order1._drinks = None
+    order1._mains = None
+    side1 = sides()
+    drink1 = drinks()
+    meal1 = meals()
     side1._sides = []
     drink1._drinks = []
     meal1._burgers = []
     meal1._wraps = []
+
     return redirect(url_for('purchased'))
 
 if __name__ == '__main__':

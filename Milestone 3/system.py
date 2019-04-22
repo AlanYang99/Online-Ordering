@@ -15,20 +15,33 @@ class OrderId:
         self._status = 'In preparation'
         OrderId.id_generator +=1
 
-
 class OrderSystem:
     def __init__(self):
-        self._orders = [] #for now, make a pickle file for orderlist
+        self._orders = []  #for now, make a pickle file for orderlist
 
     def make_booking(self,order):
         new_order = OrderId(order)
         self._orders.append(new_order)
 
+
     def get_order(self,id):
         for order in self._orders:
-            if(str(order._id) == str(id)):
+            if(int(order._id) == int(id)):
                 return order
         return None
+        # for order in self._orders:
+        #     if(order._id == int(id)):
+        #         return order
+        # return None
+        # for order in self._orders:
+        #     print("test3")
+        #     print(order._order._sides._sides)
+        #
+        #     if(str(order._id) == str(id)):
+        #         print("test4")
+        #         print(order._order._sides._sides)
+        #         return order
+        # return None
 
     def delete_order(self,id):
         i = 0
@@ -55,7 +68,7 @@ class OrderSystem:
         # order1._mains = []
         # order1._drinks = []
 
-
+sys = OrderSystem()
 
 
 # class OrderID:
