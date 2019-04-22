@@ -260,7 +260,7 @@ def make_order():
     global drink1
     global meal1
     
-    sys.make_booking(order1)
+    order = sys.make_booking(order1)
 
     #decreasing burgers
     for burger in meal1._burgers:
@@ -283,7 +283,7 @@ def make_order():
             decrement_stock("Ingredients1", name, amount)
         for ingredient in wrap._wrapIngredients._wrapIngredients:
             name = ingredient._name
-            amount = int(ingredient._amount) * int(burger._amount)
+            amount = int(ingredient._amount) * int(wrap._amount)
             decrement_stock("wrapIngredients", name, amount)
 
     #decreasing sides
