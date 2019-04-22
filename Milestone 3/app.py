@@ -32,14 +32,14 @@ def new_main():
 
 @app.route("/create-your-own/burger/")
 def new_burger():
-    return render_template('burger.html',ingredient_list = get_inventory('ingredients'),
-                            ingredient_list2 = get_inventory('ingredients1'),
+    return render_template('burger.html',ingredient_list = get_inventory('Ingredients'),
+                            ingredient_list2 = get_inventory('Ingredients1'),
                             ingredient_list3 = get_inventory('burgerIngredients'))
 
 @app.route("/create-your-own/wrap/")
 def new_wrap():
-    return render_template('wrap.html',ingredient_list = get_inventory('ingredients'),
-                            ingredient_list2 = get_inventory('ingredients1'),
+    return render_template('wrap.html',ingredient_list = get_inventory('Ingredients'),
+                            ingredient_list2 = get_inventory('Ingredients1'),
                             ingredient_list3 = get_inventory('wrapIngredients'))
 
 @app.route("/mains/")
