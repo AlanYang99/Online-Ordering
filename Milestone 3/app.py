@@ -256,7 +256,7 @@ def make_wrap():
         #print(ingr1.getIngredients)
         #print(burg1.get_burgerIngredients)
         global meal1
-        meal1.add_wrap(wraps(ingr1,wrap1,quantity_list['quantity']))
+        meal1.add_wrap(Wraps(ingr1,wrap1,quantity_list['quantity']))
         global order1
         order1.set_mains(meal1)
     #    print(burge1.getIngredients)
@@ -284,7 +284,7 @@ def make_order():
             amount = int(ingredient._amount) * int(burger._amount)
             decrement_stock("Ingredients", name, amount)
             decrement_stock("Ingredients1", name, amount)
-        for ingredient in burger._burgerIngredients._burgerIngredients:
+        for ingredient in burger._burger_ingredients._burger_ingredients:
             name = ingredient._name
             amount = int(ingredient._amount) * int(burger._amount)
             decrement_stock("burgerIngredients", name, amount)
@@ -363,7 +363,6 @@ def increment_burger_inventory():
 def increment_wrap_inventory():
     if request.method == 'POST':
         quantity_list = request.form.to_dict()
-        print(quantity_list)
         for state, capital in quantity_list.items():
             if(not(capital.isdigit())):
                 continue

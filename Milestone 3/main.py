@@ -217,12 +217,12 @@ class Meals:
         self._wraps.append(wrap)
 
     def add_Luger_Burger(self,amount):
-        to_add = burgers(meals.ingr1,meals.burg1,amount)
-        self._burgers.append(toAdd)
+        to_add = Burgers(Meals.ingr1,Meals.burg1,amount)
+        self._burgers.append(to_add)
 
     def add_Luger_Wrap(self,amount):
-        to_add = wraps(meals.ingr1,meals.wrap1,amount)
-        self._wraps.append(toAdd)
+        to_add = wraps(Meals.ingr1,Meals.wrap1,amount)
+        self._wraps.append(to_add)
 
     @property
     def display_mains(self):
