@@ -14,4 +14,61 @@
 
     </style>
 
+
+
 {% endblock %}
+{% block content %}
+<br>
+<h1 align = center> Order Mains </h1>
+<form id = "amount" method = "POST" align = "center">
+<table align = "center" id = "ord">
+    <tr>
+        <th>Main</th>
+        <th>Ingredients</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+
+
+    <tr>
+        <td>Rahooger Burger</td>
+        <td>{{burger.getIngredients}}</td>
+        <td>{{burger.price}}</td>
+        <td><input type="number" name= "burger" value = "0"
+        min="0" max="15"> </td>
+    </tr>
+    <tr>
+        <td>Rahooger Wrap</td>
+        <td>{{wrap.getIngredients}}</td>
+        <td>{{wrap.price}}</td>
+        <td><input type="number" name= "wrap" value = "0"
+        min="0" max="15"> </td>
+    </tr>
+</table>
+<br>
+<input type = "submit" class = "button" value = "Add to Order">
+</form>
+{% endblock %}
+
+@app.route("/sides/", methods = ['POST','GET'])
+def getSides():
+    if request.method == 'POST':
+        quantity_list = request.form.to_dict()
+        global side1
+        for state, capital in quantity_list.items():
+            if(not(capital.isdigit()) or int(capital) == 0):
+                continue
+            side1.set_sides(state,int(capital))
+
+        # print(type(order1))
+        #quantity_list = f.getlist('quantity')
+        #So quantity_list is now  a list of values corresponding to the users
+        #Ordered quantities of items.
+        #In sides, for special products like fries (which comes in varying) sizes
+        #do a if statement, if get_inventory , item is = fries, and decrement for large, medium small subsequently
+
+    global order1
+    order1.set_sides(side1)
+    if(side1._sides == []):
+        return "No Side Purchases"
+    return redirect(url_for('order'))
