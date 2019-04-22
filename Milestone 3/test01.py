@@ -142,11 +142,82 @@ class TestOrderMeals():
         assert my_order.totalCost       == 0 
         assert my_order.printTotal      == "No Orders Currently Made"
 
+    def test_order_burger_sides_drink_with_negatives(self, sys):
+        order_mains = meals()
 
-class TestIncrementIngredients():
-    def test_successful_increment_ingredients(self,sys):
+        ingredients = Ingredients()
+        ingredients.set_ingredients("Cheddar Cheese",-1)
+        ingredients.set_ingredients("Tomato Slices",-3)
+        ingredients.set_ingredients("Bacon",-1)
+
+        burger_ingredients = burgerIngredients()
+        burger_ingredients.set_burgerIngredients("Sesame Seed Bun",-2)
+        burger_ingredients.set_burgerIngredients("Wagyu Beef",-1)
+
+        burger = burgers(ingredients, burger_ingredients)
+        order_mains.addBurger(burger)
+
+        order_side = sides()
+        order_side.set_sides("Fries",-1)
+
+        order_drink = drinks() 
+        order_drink.set_drinks("Fanta Bottle",-1)
+
+        my_order = sys.make_order(order_mains,order_side,order_drink)
+
+        assert my_order.totalCost       == -13.6
+        assert my_order.printTotal      == "Plain burger:\n     -1x Cheddar Cheese : $-0.5<br>   -3x Tomato Slices : $-1.5<br>   -1x Bacon : $-0.6<br>    -2x Sesame Seed Bun : $-4<br>   -1x Wagyu Beef : $-4<br>    -1x Fanta Bottle : $-2<br>    -1x Fries : $-1<br>"
+
+    def test_order_burger_sides_drink_with_0_amounts(self, sys):
+        order_mains = meals()
+
+        ingredients = Ingredients()
+        ingredients.set_ingredients("Cheddar Cheese",0)
+        ingredients.set_ingredients("Tomato Slices",0)
+        ingredients.set_ingredients("Bacon",0)
+
+        burger_ingredients = burgerIngredients()
+        burger_ingredients.set_burgerIngredients("Sesame Seed Bun",0)
+        burger_ingredients.set_burgerIngredients("Wagyu Beef",0)
+
+        burger = burgers(ingredients, burger_ingredients)
+        order_mains.addBurger(burger)
+
+        order_side = sides()
+        order_side.set_sides("Fries",0)
+
+        order_drink = drinks() 
+        order_drink.set_drinks("Fanta Bottle",0)
+
+        my_order = sys.make_order(order_mains,order_side,order_drink)
+
+        assert my_order.totalCost       == 0
+        assert my_order.printTotal      == "Plain burger:\n     0x Cheddar Cheese : $0.0<br>   0x Tomato Slices : $0.0<br>   0x Bacon : $0.0<br>    0x Sesame Seed Bun : $0<br>   0x Wagyu Beef : $0<br>    0x Fanta Bottle : $0<br>    0x Fries : $0<br>"
+
+class TestDecrementIngredients():
+    def test_successful_decrement_ingredients(self,sys):
         name   = "Bacon"
         amount = 1
+
+        inventory = get_inventory("Ingredients")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        decrement_ingredients(name,amount)
+
+        inventory = get_inventory("Ingredients")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after - amount_before == amount
+
+    def test_unsuccessful_increment_ingredients(self,sys):
+        name          = "Durian"
+        amount        = 1
+        amount_before = None
+        amount_after  = None
 
         inventory = get_inventory("Ingredients")
         for i in inventory:
@@ -160,7 +231,195 @@ class TestIncrementIngredients():
             if i._name == name:
                 amount_after = i._amount
         
+        assert amount_after  == None
+        assert amount_before == None
+
+    def test_successful_increment_burger_ingredients(self,sys):
+        name   = "English Muffin"
+        amount = 1
+
+        inventory = get_inventory("burgerIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_burger_ingredients(name,amount)
+
+        inventory = get_inventory("burgerIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
         assert amount_after - amount_before == amount
+
+    def test_unsuccessful_increment_burger_ingredients(self,sys):
+        name          = "Durian"
+        amount        = 1
+        amount_before = None
+        amount_after  = None
+
+        inventory = get_inventory("burgerIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_burger_ingredients(name,amount)
+
+        inventory = get_inventory("burgerIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after  == None
+        assert amount_before == None
+
+    def test_successful_increment_wrap_ingredients(self,sys):
+        name = "Pita"
+        amount = 1
+
+        inventory = get_inventory("wrapIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_wraps_ingredients(name,amount)
+
+        inventory = get_inventory("wrapIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after - amount_before == amount
+
+    def test_unsuccessful_increment_wrap_ingredients(self,sys):
+        name          = "Durian"
+        amount        = 1
+        amount_before = None
+        amount_after  = None
+
+        inventory = get_inventory("wrapIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_wraps_ingredients(name,amount)
+
+        inventory = get_inventory("wrapIngredients")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after  == None
+        assert amount_before == None
+    
+    def test_successful_increment_sides(self,sys):
+        name = "Fries"
+        amount = 1
+
+        inventory = get_inventory("sides")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_sides(name,amount)
+
+        inventory = get_inventory("sides")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after - amount_before == amount
+
+    def test_unsuccessful_increment_sides(self,sys):
+        name          = "Durian"
+        amount        = 1
+        amount_before = None
+        amount_after  = None
+
+        inventory = get_inventory("sides")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_sides(name,amount)
+
+        inventory = get_inventory("sides")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after  == None
+        assert amount_before == None
+    
+    def test_successful_increment_drinks(self,sys):
+        name = "Fanta Bottle"
+        amount = 1
+
+        inventory = get_inventory("drinks")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_drinks(name,amount)
+
+        inventory = get_inventory("drinks")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after - amount_before == amount
+
+    def test_unsuccessful_increment_drinks(self,sys):
+        name          = "Durian"
+        amount        = 1
+        amount_before = None
+        amount_after  = None
+
+        inventory = get_inventory("drinks")
+        for i in inventory:
+            if i._name == name:
+                amount_before = i._amount
+        
+        increment_wraps_ingredients(name,amount)
+
+        inventory = get_inventory("drinks")
+        for i in inventory:
+            if i._name == name:
+                amount_after = i._amount
+        
+        assert amount_after  == None
+        assert amount_before == None
+
+class TestIncrementIngredients():
+    def test_successful_increment_ingredients(self,sys):
+
+        order_mains = meals()
+
+        ingredients = Ingredients()
+        ingredients.set_ingredients("Cheddar Cheese",1)
+        ingredients.set_ingredients("Tomato Slices",3)
+        ingredients.set_ingredients("Bacon",1)
+
+        burger_ingredients = burgerIngredients()
+        burger_ingredients.set_burgerIngredients("Sesame Seed Bun",2)
+        burger_ingredients.set_burgerIngredients("Wagyu Beef",1)
+
+        burger = burgers(ingredients, burger_ingredients)
+        order_mains.addBurger(burger)
+
+        order_side = sides()
+        order_side.set_sides("Fries",1)
+
+        order_drink = drinks() 
+        order_drink.set_drinks("Fanta Bottle",1)
+
+        my_order = sys.make_order(order_mains,order_side,order_drink)
+
+        for i in ingredients:
+            if i._name == "Cheddar Cheese":
+                amount = i._amount
+        
+        assert 3 - amount == 0
 
     def test_unsuccessful_increment_ingredients(self,sys):
         name          = "Durian"
