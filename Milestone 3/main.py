@@ -117,7 +117,6 @@ class burgerIngredients:
         burger_ingredient_list = ' '
         for ingredient in self._burgerIngredients:
             burger_ingredient_list += "   " + str(ingredient)
-            print(str(ingredient))
         return burger_ingredient_list
 
     @property

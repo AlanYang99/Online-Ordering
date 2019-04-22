@@ -22,7 +22,7 @@ class Order:
             price += self._drinks.price
         return price
 
-    #@property
+    @property
     def printTotal(self):
         output = ''
         if(self._mains != None):
